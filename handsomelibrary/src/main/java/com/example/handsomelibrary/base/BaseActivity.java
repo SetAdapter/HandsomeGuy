@@ -2,16 +2,21 @@ package com.example.handsomelibrary.base;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.handsomelibrary.R;
+import com.example.handsomelibrary.utils.cache.ACache;
 
 /**
  * Activity 基类
  * Created by Stefan on 2018/4/20 15:07.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
+
+    protected ACache mCache;
+
     /**
      * 获取TAG的activity名称
      */
@@ -35,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
                     WindowManager.LayoutParams. FLAG_FULLSCREEN);
         }
+        mCache = ACache.get(this);
         setContentView(getContentView());
         super.onCreate(savedInstanceState);
         initView();

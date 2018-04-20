@@ -44,6 +44,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         return mContentView;
     }
 
+    @Override//Fragment和Activity解除关联的时候调用
+    public void onDetach() {
+        super.onDetach();
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

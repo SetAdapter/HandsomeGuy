@@ -12,6 +12,10 @@ import com.example.handsomelibrary.R;
  * Created by Stefan on 2018/4/20 15:07.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    /**
+     * 获取TAG的activity名称
+     */
+    protected final String TAG = this.getClass().getSimpleName();
 
     /**
      * 是否显示标题栏
@@ -24,7 +28,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     private  boolean isShowState = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         if(!isShowTitle){
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
@@ -33,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     WindowManager.LayoutParams. FLAG_FULLSCREEN);
         }
         setContentView(getContentView());
+        super.onCreate(savedInstanceState);
         initView();
         initData(savedInstanceState);
     }
@@ -68,8 +72,4 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected abstract void initData(Bundle savedInstanceState);
 
-    /**
-     * 获取TAG的activity名称
-     */
-    protected final String TAG = this.getClass().getSimpleName();
 }

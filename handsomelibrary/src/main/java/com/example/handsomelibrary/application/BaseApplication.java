@@ -3,6 +3,7 @@ package com.example.handsomelibrary.application;
 import android.app.Application;
 
 /**
+ * 基础 application
  * Created by Stefan on 2018/4/20.
  */
 
@@ -15,6 +16,8 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
+
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallback());
     }
 
     /**

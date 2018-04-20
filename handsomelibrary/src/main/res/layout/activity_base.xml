@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mylibrary.base.BaseActivity">
+    tools:context="com.example.handsomelibrary.base.BaseActivity">
 
 </android.support.constraint.ConstraintLayout>

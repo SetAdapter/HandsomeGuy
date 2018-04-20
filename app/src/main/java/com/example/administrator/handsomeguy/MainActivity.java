@@ -1,8 +1,12 @@
 package com.example.administrator.handsomeguy;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
+
+/**
+ * Created by Stefan on 2018/4/20 15:06.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

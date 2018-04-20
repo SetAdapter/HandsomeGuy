@@ -1,4 +1,4 @@
-package com.example.mylibrary;
+package com.example.handsomelibrary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -18,6 +18,11 @@ public class BaseApplication extends Application {
         mApplication = this;
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallback());
+
+        /**
+         * 初始化配置
+         */
+        
     }
 
     /**

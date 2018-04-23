@@ -46,6 +46,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         initView();
         initData(savedInstanceState);
     }
+    @Override
+    public void onClick(View view) {
+    }
 
     /**
      * 是否设置标题栏

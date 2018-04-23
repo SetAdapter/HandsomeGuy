@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
+ * Gson数据 设置
  * Created by Stefan on 2018/4/23 13:52.
  */
 

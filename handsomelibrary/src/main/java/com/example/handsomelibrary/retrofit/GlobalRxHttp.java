@@ -179,11 +179,12 @@ public class GlobalRxHttp {
      *
      * @return
      */
-    public GlobalRxHttp setSslSocketFactory() {
+    //TODO 信任所有证书 待完成
+/*    public GlobalRxHttp setSslSocketFactory() {
         SSLUtils.SSLParams sslParams = SSLUtils.getSslSocketFactory();
         getGlobalOkHttpBuilder().sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
         return this;
-    }
+    }*/
 
     /**
      * 使用预埋证书，校验服务端证书（自签名证书）

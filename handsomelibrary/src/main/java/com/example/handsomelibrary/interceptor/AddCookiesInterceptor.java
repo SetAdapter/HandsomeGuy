@@ -2,8 +2,8 @@ package com.example.handsomelibrary.interceptor;
 
 import android.util.Log;
 
-import com.allen.library.constant.SPKeys;
-import com.allen.library.utils.SPUtils;
+import com.example.handsomelibrary.constant.SPKeys;
+import com.example.handsomelibrary.utils.SPUtils;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -13,11 +13,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by Allen on 2017/5/11.
- * <p>
- *
- * @author Allen
- *         请求头里边添加cookie
+ * 请求头里边添加cookie
+ * Created by Stefan on 2018/4/23 14:29.
  */
 
 public class AddCookiesInterceptor implements Interceptor {

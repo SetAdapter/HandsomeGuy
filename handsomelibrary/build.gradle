@@ -48,4 +48,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-scalars:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+
+    // greendao数据库
+    compile 'org.greenrobot:greendao:3.2.2' // add library
+    compile 'org.greenrobot:greendao-generator:3.2.2'
 }

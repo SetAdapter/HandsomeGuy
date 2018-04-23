@@ -14,11 +14,8 @@ import io.reactivex.schedulers.Schedulers;
 
 
 /**
- * Created by Allen on 2016/12/20.
- * <p>
- *
- * @author Allen
- *         控制操作线程的辅助类
+ * 控制操作线程的辅助类
+ * Created by Stefan on 2018/4/23 14:30.
  */
 
 public class Transformer {

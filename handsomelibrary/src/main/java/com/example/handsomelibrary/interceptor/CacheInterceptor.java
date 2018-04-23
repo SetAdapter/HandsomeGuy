@@ -5,7 +5,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.allen.library.RxHttpUtils;
+
+import com.example.handsomelibrary.retrofit.RxHttpUtils;
 
 import java.io.IOException;
 
@@ -15,13 +16,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by Allen on 2017/1/3.
- * <p>
- *
- * @author Allen
- *         网络缓存
+ * 网络缓存
+ * Created by Stefan on 2018/4/23 14:29.
  */
-
 public class CacheInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {

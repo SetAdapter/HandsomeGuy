@@ -9,6 +9,8 @@
     <!-- 从SDCard读取数据权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.example.handsomelibrary.application.BaseApplication"
         android:allowBackup="true"

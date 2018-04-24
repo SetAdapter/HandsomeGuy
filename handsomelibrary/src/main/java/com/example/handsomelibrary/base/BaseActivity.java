@@ -7,7 +7,11 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.handsomelibrary.R;
+import com.example.handsomelibrary.utils.SharedPreUtils;
 import com.example.handsomelibrary.utils.cache.ACache;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Activity 基类
@@ -15,6 +19,8 @@ import com.example.handsomelibrary.utils.cache.ACache;
  */
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
 
+    public static final String USERNAME="水 户 洋 平";
+    public static final String PASSWORD="fan851248";
     protected ACache mCache;
 
     /**
@@ -49,6 +55,20 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
     }
+
+    /**
+     * 获取token
+     *
+     * @return
+     */
+    public Map tokenMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("access-token", SharedPreUtils.getInstance().getString("token", "weyue"));
+        map.put("app-type", "Android");
+//        map.put("version-code", WYApplication.packageInfo.versionCode);
+        return map;
+    }
+
 
     /**
      * 是否设置标题栏

@@ -2,7 +2,7 @@ package com.example.handsomelibrary.api;
 
 
 import com.example.handsomelibrary.model.UserBean;
-import com.example.handsomelibrary.retrofit.BaseBean;
+import com.example.handsomelibrary.model.BaseBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

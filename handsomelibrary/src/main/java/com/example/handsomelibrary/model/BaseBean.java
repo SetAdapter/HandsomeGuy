@@ -1,4 +1,4 @@
-package com.example.handsomelibrary.retrofit;
+package com.example.handsomelibrary.model;
 
 import java.io.Serializable;
 

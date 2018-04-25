@@ -1,5 +1,7 @@
 package com.example.handsomelibrary.base;
 
+import android.app.Dialog;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public static final String USERNAME="水 户 洋 平";
     public static final String PASSWORD="fan851248";
     protected ACache mCache;
+    public Dialog loading_dialog;
+    protected BaseActivity  mContext;
 
     /**
      * 获取TAG的activity名称
@@ -39,6 +43,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private  boolean isShowState = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loading_dialog = new AlertDialog.Builder(this).setMessage("loading...").create();
+        mContext=this;
         if(!isShowTitle){
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }

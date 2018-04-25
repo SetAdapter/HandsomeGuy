@@ -12,6 +12,7 @@ import com.example.handsomelibrary.model.BaseBean;
 import com.example.handsomelibrary.model.LoginBean;
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import com.example.handsomelibrary.retrofit.observer.CommonObserver;
+import com.example.handsomelibrary.utils.JumpUtils;
 import com.example.handsomelibrary.utils.T;
 
 import butterknife.BindView;
@@ -67,12 +68,12 @@ public class LoginActivity extends BaseActivity {
                 .addHeaders(tokenMap())
                 .createSApi(ApiService.class)
                 .login(userName, passWord)
-                .compose(Transformer.<BaseBean<LoginBean>>switchSchedulers())
-                .subscribe(new CommonObserver<BaseBean<LoginBean>>() {
+                .compose(Transformer.<BaseBean<LoginBean>>switchSchedulers(loading_dialog))
+                .subscribe(new CommonObserver<BaseBean<LoginBean>>(loading_dialog) {
                     @Override
                     protected void onSuccess(BaseBean<LoginBean> stringBaseBean) {
                         if (userName.equals(USERNAME) && passWord.equals(PASSWORD)) {
-                            T.showShort("OK!!!");
+                            JumpUtils.jump(mContext,MainActivity.class,null);
                         } else {
                             T.showShort("请输入正确的账号密码");
                         }

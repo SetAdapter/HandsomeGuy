@@ -2,7 +2,7 @@ package com.example.handsomelibrary.utils;
 
 import android.widget.Toast;
 
-import com.example.handsomelibrary.application.BaseApplication;
+import com.example.handsomelibrary.application.BaseApp;
 
 /**
  * Toast统一管理类 (解决多次弹出toast)
@@ -34,7 +34,7 @@ public class T {
      * @param message
      */
     public static void showShort(int message) {
-        show(BaseApplication.getApplication().getResources().getString(message), Toast.LENGTH_SHORT);
+        show(BaseApp.getApplication().getResources().getString(message), Toast.LENGTH_SHORT);
     }
 
     /**
@@ -52,7 +52,7 @@ public class T {
      * @param message
      */
     public static void showLong(int message) {
-        show(BaseApplication.getApplication().getResources().getString(message), Toast.LENGTH_LONG);
+        show(BaseApp.getApplication().getResources().getString(message), Toast.LENGTH_LONG);
     }
 
     /**
@@ -63,7 +63,7 @@ public class T {
         if (isShow){
 
             if (null == toast){
-                toast =  Toast.makeText(BaseApplication.getApplication(), message, duration);
+                toast =  Toast.makeText(BaseApp.getApplication(), message, duration);
             } else {
                 toast.setText(message);
             }

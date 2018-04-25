@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
-import com.example.handsomelibrary.application.BaseApplication;
+import com.example.handsomelibrary.application.BaseApp;
 import java.util.Map;
 
 /**
@@ -24,7 +24,7 @@ public class SpfUtils {
     }
 
     private static SharedPreferences getSpf(){
-        Context ctx = BaseApplication.getApplication();
+        Context ctx = BaseApp.getApplication();
         SharedPreferences mSpf = ctx.getSharedPreferences(spfFileName, Context.MODE_PRIVATE);
 
         return mSpf;

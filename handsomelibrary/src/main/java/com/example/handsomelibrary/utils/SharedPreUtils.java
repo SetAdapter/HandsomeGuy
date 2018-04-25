@@ -3,7 +3,7 @@ package com.example.handsomelibrary.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.handsomelibrary.application.BaseApplication;
+import com.example.handsomelibrary.application.BaseApp;
 /**
  * Created by newbiechen on 17-4-16.
  */
@@ -15,7 +15,7 @@ public class SharedPreUtils {
     private static SharedPreferences.Editor sharedWritable;
 
     private SharedPreUtils() {
-        sharedReadable = BaseApplication.getApplication()
+        sharedReadable = BaseApp.getApplication()
                 .getSharedPreferences(SHARED_NAME, Context.MODE_MULTI_PROCESS);
         sharedWritable = sharedReadable.edit();
     }

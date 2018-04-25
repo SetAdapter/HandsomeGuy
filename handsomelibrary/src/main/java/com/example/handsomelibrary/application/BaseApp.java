@@ -12,9 +12,9 @@ import java.util.Map;
  * Created by Stefan on 2018/4/20.
  */
 
-public class BaseApplication extends Application {
+public class BaseApp extends Application {
 
-    private static BaseApplication mApplication; // 单例模式
+    private static BaseApp mApplication; // 单例模式
 
 
     @Override
@@ -52,7 +52,7 @@ public class BaseApplication extends Application {
 //                //全局超时配置
                 .setConnectTimeout(10)
                 //全局是否打开请求log日志
-               // .setLog(true)
+                .setLog(true)
                 ;
     }
 
@@ -61,7 +61,7 @@ public class BaseApplication extends Application {
      *
      * @return
      */
-    public static BaseApplication getApplication() {
+    public static BaseApp getApplication() {
         return mApplication;
     }
 }

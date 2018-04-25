@@ -1,11 +1,13 @@
-package com.example.handsomelibrary.utils;
+package com.example.administrator.handsomeguy.apputils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.handsomelibrary.application.BaseApp;
+
 /**
- * Created by newbiechen on 17-4-16.
+ *
+ * Created by Stefan on 2018/4/25 14:04.
  */
 
 public class SharedPreUtils {
@@ -15,7 +17,7 @@ public class SharedPreUtils {
     private static SharedPreferences.Editor sharedWritable;
 
     private SharedPreUtils() {
-        sharedReadable = BaseApp.getApplication()
+        sharedReadable = BaseApp.getAppContext()
                 .getSharedPreferences(SHARED_NAME, Context.MODE_MULTI_PROCESS);
         sharedWritable = sharedReadable.edit();
     }
@@ -72,12 +74,11 @@ public class SharedPreUtils {
         return sharedReadable.getBoolean(key, def);
     }
 
-/*
     public Theme getCurrentTheme() {
         return Theme.valueOf(getString("app_theme", Theme.Cyan.name()));
     }
 
     public void setCurrentTheme(Theme currentTheme) {
         putString("app_theme", currentTheme.name());
-    }*/
+    }
 }

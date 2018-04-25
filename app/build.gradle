@@ -27,4 +27,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile project(':handsomelibrary')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.afollestad.material-dialogs:commons:0.9.0.2'
+    compile 'com.afollestad.material-dialogs:core:0.9.0.2'
 }

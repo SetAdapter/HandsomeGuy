@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.handsomelibrary.R;
-import com.example.handsomelibrary.utils.SharedPreUtils;
 import com.example.handsomelibrary.utils.cache.ACache;
 
 import java.util.HashMap;
@@ -55,26 +53,12 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         mCache = ACache.get(this);
         setContentView(getContentView());
         super.onCreate(savedInstanceState);
-        initView();
+        BaseInitView();
         initData(savedInstanceState);
     }
     @Override
     public void onClick(View view) {
     }
-
-    /**
-     * 获取token
-     *
-     * @return
-     */
-    public Map tokenMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("access-token", SharedPreUtils.getInstance().getString("token", "weyue"));
-        map.put("app-type", "Android");
-//        map.put("version-code", WYApplication.packageInfo.versionCode);
-        return map;
-    }
-
 
     /**
      * 是否设置标题栏
@@ -98,10 +82,12 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * @return
      */
     protected abstract int getContentView();
+
     /**
      * 初始化布局
      */
-    protected abstract void initView();
+    protected void BaseInitView() {}
+
     /**
      * 设置数据
      */

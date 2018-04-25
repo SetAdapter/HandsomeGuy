@@ -1,6 +1,8 @@
 package com.example.handsomelibrary.application;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.res.Resources;
 
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
 
@@ -16,7 +18,22 @@ public class BaseApp extends Application {
 
     private static BaseApp mApplication; // 单例模式
 
+    /**
+     * 单例模式，获取Application的实例
+     *
+     * @return
+     */
+    public static BaseApp getApplication() {
+        return mApplication;
+    }
 
+    public static Context getAppContext() {
+        return mApplication;
+    }
+
+    public static Resources getAppResources() {
+        return mApplication.getResources();
+    }
     @Override
     public void onCreate() {
         super.onCreate();
@@ -56,12 +73,5 @@ public class BaseApp extends Application {
                 ;
     }
 
-    /**
-     * 单例模式，获取Application的实例
-     *
-     * @return
-     */
-    public static BaseApp getApplication() {
-        return mApplication;
-    }
+
 }

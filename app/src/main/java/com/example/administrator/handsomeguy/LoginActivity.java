@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
 import com.example.handsomelibrary.api.ApiService;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.interceptor.Transformer;
@@ -14,6 +15,9 @@ import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import com.example.handsomelibrary.retrofit.observer.CommonObserver;
 import com.example.handsomelibrary.utils.JumpUtils;
 import com.example.handsomelibrary.utils.T;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,11 +42,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {
-
-    }
-
-    @Override
     protected void initData(Bundle savedInstanceState) {
 
 
@@ -58,7 +57,7 @@ public class LoginActivity extends BaseActivity {
 //                if(userName.equals("")||passWord.equals("")){
 //                    T.showShort("请输入账号密码！");
 //                }
-                getLogin(userName, passWord);
+                getLogin("水 户 洋 平", "fan851248");
 
         }
     }
@@ -74,6 +73,7 @@ public class LoginActivity extends BaseActivity {
                     protected void onSuccess(BaseBean<LoginBean> stringBaseBean) {
                         if (userName.equals(USERNAME) && passWord.equals(PASSWORD)) {
                             JumpUtils.jump(mContext,MainActivity.class,null);
+                            finish();
                         } else {
                             T.showShort("请输入正确的账号密码");
                         }
@@ -84,5 +84,19 @@ public class LoginActivity extends BaseActivity {
                         T.showShort(errorMsg);
                     }
                 });
+    }
+
+
+    /**
+     * 获取token
+     *
+     * @return
+     */
+    public Map tokenMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("access-token", SharedPreUtils.getInstance().getString("token", "weyue"));
+        map.put("app-type", "Android");
+//        map.put("version-code", WYApplication.packageInfo.versionCode);
+        return map;
     }
 }

@@ -1,11 +1,16 @@
 package com.example.administrator.handsomeguy;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
+import com.example.administrator.handsomeguy.apputils.SnackBarUtils;
 import com.example.handsomelibrary.api.ApiService;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.interceptor.Transformer;
@@ -72,7 +77,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     protected void onSuccess(BaseBean<LoginBean> stringBaseBean) {
                         if (userName.equals(USERNAME) && passWord.equals(PASSWORD)) {
-                            JumpUtils.jump(mContext,MainActivity.class,null);
+                            JumpUtils.jump(mContext, MainActivity.class, null);
                             finish();
                         } else {
                             T.showShort("请输入正确的账号密码");
@@ -86,6 +91,41 @@ public class LoginActivity extends BaseActivity {
                 });
     }
 
+    private static final String TAG_EXIT = "exit";
+
+//    @Override
+//    protected void onNewIntent(Intent intent) {
+//        super.onNewIntent(intent);
+//        if (intent != null) {
+//            boolean isExit = intent.getBooleanExtra(TAG_EXIT, false);
+//            if (isExit) {
+//                this.finish();
+//            }
+//        }
+//    }
+
+    private long fristTime = 0;
+    private boolean mIsExit;
+
+    /**
+     * 双击返回键退出
+     */
+
+//    @Override
+//    public void onBackPressed() {
+//
+//        long secondTime = System.currentTimeMillis();
+//        if (secondTime - fristTime < 2000) {
+//            //finish();
+//            Intent intent = new Intent(this,LoginActivity.class);
+//            intent.putExtra(LoginActivity.TAG_EXIT, true);
+//            startActivity(intent);
+//        } else {
+//            SnackBarUtils.makeShort(getWindow().getDecorView(), "再点击一次退出应用").show();
+//            fristTime = System.currentTimeMillis();
+//        }
+//
+//    }
 
     /**
      * 获取token

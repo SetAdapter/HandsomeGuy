@@ -24,12 +24,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.administrator.handsomeguy.activity.LoginActivity;
 import com.example.administrator.handsomeguy.adapter.MainMenuAdapter;
 import com.example.administrator.handsomeguy.apputils.BaseUtils;
 import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
 import com.example.administrator.handsomeguy.apputils.SnackBarUtils;
 import com.example.administrator.handsomeguy.apputils.Theme;
 import com.example.administrator.handsomeguy.apputils.ThemeUtils;
+import com.example.administrator.handsomeguy.fragment.BookClassifyFragment;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.model.MainMenuBean;
 import com.example.handsomelibrary.utils.JumpUtils;
@@ -71,8 +73,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     ResideLayout mResideLayout;
     @BindView(R.id.iv_toolbar_more)
     AppCompatImageView mIvToolBarMore;
-    @BindView(R.id.tv_back)
-    TextView tv_back;
+
     private long fristTime = 0;
     private MainMenuAdapter mainMenuAdapter;
     private FragmentManager fragmentManager;
@@ -132,9 +133,9 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 
         if (foundFragment == null) {
             switch (name) {
-//                case "分类":
-//                    foundFragment = BookClassifyFragment.newInstance();
-//                    break;
+                case "分类":
+                    foundFragment = BookClassifyFragment.newInstance();
+                    break;
 //                case "书架":
 //                    foundFragment = BookShelfFragment.newInstance();
 //                    break;
@@ -168,7 +169,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
         mTvSetting.setText("设置");
     }
 
-    @OnClick({R.id.iv_avatar, R.id.tv_theme, R.id.tv_setting})
+    @OnClick({R.id.iv_avatar, R.id.tv_theme, R.id.tv_setting,R.id.tv_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_avatar:
@@ -196,6 +197,10 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 //                } else {
 //                    startActivity(SettingActivity.class);
 //                }
+                break;
+
+            case  R.id.tv_back:
+                mResideLayout.openPane();
                 break;
         }
     }

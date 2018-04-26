@@ -21,7 +21,7 @@ public class UserBean {
     public String token;
     public String nickname;
     @Transient
-    public List<BookBean> likebooks;
+    public List<ClassifyBean> likebooks;
     
     @Generated(hash = 2010221856)
     public UserBean(String name, String password, String icon, String brief,
@@ -73,11 +73,11 @@ public class UserBean {
         this.nickname = nickname;
     }
 
-    public List<BookBean> getLikebooks() {
+    public List<ClassifyBean> getLikebooks() {
         return likebooks;
     }
 
-    public void setLikebooks(List<BookBean> likebooks) {
+    public void setLikebooks(List<ClassifyBean> likebooks) {
         this.likebooks = likebooks;
     }
 }

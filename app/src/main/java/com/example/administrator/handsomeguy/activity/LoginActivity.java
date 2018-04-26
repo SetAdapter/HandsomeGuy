@@ -1,16 +1,13 @@
-package com.example.administrator.handsomeguy;
+package com.example.administrator.handsomeguy.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.administrator.handsomeguy.MainActivity;
+import com.example.administrator.handsomeguy.R;
 import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
-import com.example.administrator.handsomeguy.apputils.SnackBarUtils;
 import com.example.handsomelibrary.api.ApiService;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.interceptor.Transformer;

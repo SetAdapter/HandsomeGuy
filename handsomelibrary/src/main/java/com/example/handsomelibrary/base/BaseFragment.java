@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.example.handsomelibrary.utils.cache.ACache;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -79,12 +82,12 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     /**
      * 初始化布局
      */
-    protected abstract void initView();
+    protected  void initView(){}
 
     /**
      * 设置数据
      */
-    protected void initData(){}
+    protected abstract void initData();
 
 
 }

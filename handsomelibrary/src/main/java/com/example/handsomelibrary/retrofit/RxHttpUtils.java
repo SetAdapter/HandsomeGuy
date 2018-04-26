@@ -22,7 +22,7 @@ import okhttp3.ResponseBody;
 
 public class RxHttpUtils {
 
-    private static RxHttpUtils instance;
+    private volatile static RxHttpUtils instance;
     private static Application mContext;
 
     private static List<Disposable> disposables;

@@ -9,6 +9,8 @@ import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.handsomelibrary.api.ApiService.WEIYUE_URL;
+
 /**
  * 基础 application
  * Created by Stefan on 2018/4/20.
@@ -51,13 +53,13 @@ public class BaseApp extends Application {
                 //开启全局配置
                 .config()
                 //全局的BaseUrl
-                //.setBaseUrl("")
-                //.setHeaders(headerMaps)
+                .setBaseUrl(WEIYUE_URL)
+                .setHeaders(headerMaps)
                 //全局持久话cookie,保存本地每次都会携带在header中
                 .setCookie(false)
                 //全局ssl证书认证
                 //信任所有证书,不安全有风险
-                .setSslSocketFactory()
+               // .setSslSocketFactory()
                 //使用预埋证书，校验服务端证书（自签名证书）
                 //.setSslSocketFactory(getAssets().open("your.cer"))
                 //使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）

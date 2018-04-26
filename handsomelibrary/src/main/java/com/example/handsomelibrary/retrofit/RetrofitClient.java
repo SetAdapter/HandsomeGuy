@@ -26,7 +26,7 @@ public class RetrofitClient {
         mRetrofitBuilder = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(GsonClass.buildGson()))
-                .baseUrl(ApiService.BASE_URL);
+                .baseUrl(ApiService.WEIYUE_URL);
     }
 
     public static RetrofitClient getInstance() {

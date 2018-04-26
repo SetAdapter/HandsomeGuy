@@ -15,12 +15,9 @@ public class TextFragment extends BaseFragment{
     }
 
     @Override
-    protected void initView() {
-
-    }
-
-    @Override
     protected void initData() {
-        super.initData();
+
     }
+
+
 }

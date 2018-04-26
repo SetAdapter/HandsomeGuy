@@ -12,6 +12,10 @@ import java.util.Map;
  * Created by fangs on 2017/5/18.
  */
 public class SpfUtils {
+    private static final String SHARED_NAME = "WeYue_SP";
+    private static SpfUtils sInstance;
+    private static SharedPreferences sharedReadable;
+    private static SharedPreferences.Editor sharedWritable;
 
 //    创建的Preferences文件存放位置可以在Eclipse中查看：
 //	  DDMS->File Explorer /<package name>/shared_prefs/setting.xml
@@ -19,8 +23,23 @@ public class SpfUtils {
     private static String spfFileName = "fySpf";
 
     private SpfUtils() {
-        /* cannot be instantiated */
-        throw new UnsupportedOperationException("cannot be instantiated");
+        sharedReadable = BaseApp.getAppContext()
+                .getSharedPreferences(SHARED_NAME, Context.MODE_MULTI_PROCESS);
+        sharedWritable = sharedReadable.edit();
+
+//        /* cannot be instantiated */
+//        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
+    public static SpfUtils getInstance() {
+        if (sInstance == null) {
+            synchronized (SpfUtils.class) {
+                if (sInstance == null) {
+                    sInstance = new SpfUtils();
+                }
+            }
+        }
+        return sInstance;
     }
 
     private static SharedPreferences getSpf(){
@@ -28,6 +47,10 @@ public class SpfUtils {
         SharedPreferences mSpf = ctx.getSharedPreferences(spfFileName, Context.MODE_PRIVATE);
 
         return mSpf;
+    }
+
+    public String getString(String key, String defValue) {
+        return sharedReadable.getString(key, defValue);
     }
 
     /**

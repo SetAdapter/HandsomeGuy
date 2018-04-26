@@ -8,9 +8,11 @@ import com.example.handsomelibrary.interceptor.AddCookiesInterceptor;
 import com.example.handsomelibrary.interceptor.CacheInterceptor;
 import com.example.handsomelibrary.interceptor.HeaderInterceptor;
 import com.example.handsomelibrary.interceptor.ReceivedCookiesInterceptor;
+import com.example.handsomelibrary.utils.SpfUtils;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -25,9 +27,9 @@ import retrofit2.Retrofit;
  */
 
 public class GlobalRxHttp {
-    private static GlobalRxHttp instance; // 单例模式
+    private volatile static GlobalRxHttp instance; // 单例模式
 
-    public static GlobalRxHttp getInstance(){
+    public static GlobalRxHttp getInstance() {
         if (instance == null) {
             synchronized (GlobalRxHttp.class) {
                 if (instance == null) {
@@ -40,6 +42,7 @@ public class GlobalRxHttp {
 
     /**
      * 设置baseUrl
+     *
      * @param baseUrl
      * @return
      */
@@ -66,6 +69,9 @@ public class GlobalRxHttp {
      * @return
      */
     public GlobalRxHttp setHeaders(Map<String, Object> headerMaps) {
+        //统一请求头
+        headerMaps.put("access-token", SpfUtils.getInstance().getString("token", "weyue"));
+        headerMaps.put("app-type", "Android");
         getGlobalOkHttpBuilder().addInterceptor(new HeaderInterceptor(headerMaps));
         return this;
     }

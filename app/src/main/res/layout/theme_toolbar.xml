@@ -27,7 +27,8 @@
             android:drawableLeft="@mipmap/back"
             android:drawablePadding="4dp"
             android:padding="5dp"
-            android:text="沐音"
+            android:text=" 沐音忆羽"
+            android:textSize="16dp"
             android:textColor="@color/white" />
 
         <android.support.v7.widget.AppCompatImageView

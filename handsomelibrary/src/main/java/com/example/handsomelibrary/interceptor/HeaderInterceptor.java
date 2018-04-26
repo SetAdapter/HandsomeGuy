@@ -29,6 +29,7 @@ public class HeaderInterceptor implements Interceptor {
                 request.addHeader(entry.getKey(), (String) entry.getValue());
             }
         }
+
         return chain.proceed(request.build());
     }
 

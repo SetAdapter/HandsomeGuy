@@ -5,9 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.TextView;
 
-import com.example.administrator.handsomeguy.MainActivity;
 import com.example.administrator.handsomeguy.R;
 import com.example.administrator.handsomeguy.fragment.HotBookFragment;
 import com.example.administrator.handsomeguy.fragment.NewBookFragment;
@@ -37,9 +35,7 @@ public class BookListActivity extends BaseActivity {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-
         titleName = getIntent().getExtras().getString("titleName");
-
         mFragments = new ArrayList<>();
         mFragments.add(new HotBookFragment());
         mFragments.add(new NewBookFragment());
@@ -91,4 +87,5 @@ public class BookListActivity extends BaseActivity {
                 break;
         }
     }
+
 }

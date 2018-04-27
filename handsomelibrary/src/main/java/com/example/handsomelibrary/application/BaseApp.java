@@ -3,8 +3,19 @@ package com.example.handsomelibrary.application;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
+import com.scwang.smartrefresh.header.TaurusHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
+import com.scwang.smartrefresh.layout.api.RefreshFooter;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,6 +85,41 @@ public class BaseApp extends Application {
                 .setLog(true)
                 ;
     }
+    //设置 使用指定的 Header 和 Footer 全局设置
+    //飞机模式
+    static {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
+            @NonNull
+            @Override
+            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
+                return new TaurusHeader(context);
+            }
+        });
+        SmartRefreshLayout.setDefaultRefreshFooterCreater(new DefaultRefreshFooterCreater() {
+            @NonNull
+            @Override
+            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
+                return new BallPulseFooter(context);
+            }
+        });
+    }
+    //普通模式
+   /* static {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
+            @NonNull
+            @Override
+            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
 
+                return new ClassicsHeader(context);
+            }
+        });
+        SmartRefreshLayout.setDefaultRefreshFooterCreater(new DefaultRefreshFooterCreater() {
+            @NonNull
+            @Override
+            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
+                return new ClassicsFooter(context);
+            }
+        });
+    }*/
 
 }

@@ -14,9 +14,10 @@
         android:layout_height="20dp"
         android:background="?attr/colorPrimary" />
 
-    <RelativeLayout
+    <com.example.handsomelibrary.view.theme.ColorRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:background="?attr/colorPrimary"
         android:layout_below="@+id/status_bar">
 
         <TextView
@@ -44,6 +45,6 @@
             tools:ignore="VectorDrawableCompat"
             tools:visibility="visible" />
 
-    </RelativeLayout>
+    </com.example.handsomelibrary.view.theme.ColorRelativeLayout>
 
 </com.example.handsomelibrary.view.theme.ColorRelativeLayout>

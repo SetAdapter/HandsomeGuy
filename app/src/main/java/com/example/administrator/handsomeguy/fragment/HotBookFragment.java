@@ -16,6 +16,9 @@ import com.example.handsomelibrary.model.BookBean;
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import com.example.handsomelibrary.retrofit.observer.CommonObserver;
 import com.example.handsomelibrary.utils.T;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,12 +32,15 @@ import butterknife.BindView;
  * Created by Stefan on 2018/4/26.
  */
 
-public class HotBookFragment extends BaseFragment{
+public class HotBookFragment extends BaseFragment implements OnRefreshLoadmoreListener{
     @BindView(R.id.rv_bookList)
     RecyclerView rv_bookList;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refresh;
 
     BookListAdapter adapter;
     private String titleName;
+    private int loadPage = 1;
 
     @Override
     protected int getLayoutID() {
@@ -43,25 +49,27 @@ public class HotBookFragment extends BaseFragment{
 
     @Override
     protected void initData() {
+        refresh.setOnRefreshLoadmoreListener(this);
         titleName = BookListActivity.titleName;
         adapter=new BookListAdapter(new ArrayList<BookBean>());
-        getHotBookList();
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rv_bookList.setLayoutManager(new LinearLayoutManager(mContext));
         rv_bookList.setAdapter(adapter);
-
+        refresh.autoRefresh();
     }
 
-    private void getHotBookList() {
+    private void getHotBookList(int loadPage) {
         RxHttpUtils.getSingleInstance().addHeaders(tokenMap())
                 .createSApi(ApiService.class)
-                .bookList("hot",titleName,1)
+                .bookList("hot",titleName,loadPage)
                 .compose(Transformer.<BaseBean<List<BookBean>>>switchSchedulers())
                 .subscribe(new CommonObserver<BaseBean<List<BookBean>>>() {
                     @Override
                     protected void onSuccess(BaseBean<List<BookBean>> listBaseBean) {
+                        refresh.finishRefresh();
+                        refresh.finishLoadmore();
                         if(listBaseBean!=null&&listBaseBean.getData().size()!=0){
-                            adapter.setNewData(listBaseBean.getData());
+                            adapter.addData(listBaseBean.getData());
                         }else {
                             T.showShort("无更多书籍");
                         }
@@ -70,7 +78,8 @@ public class HotBookFragment extends BaseFragment{
 
                     @Override
                     protected void onError(String errorMsg) {
-
+                        refresh.finishRefresh();
+                        refresh.finishLoadmore();
                     }
                 });
 
@@ -87,5 +96,17 @@ public class HotBookFragment extends BaseFragment{
         map.put("app-type", "Android");
 //        map.put("version-code", WYApplication.packageInfo.versionCode);
         return map;
+    }
+
+    @Override
+    public void onLoadmore(RefreshLayout refreshlayout) {
+        loadPage++;
+        getHotBookList(loadPage);
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshlayout) {
+        loadPage=1;
+        getHotBookList(1);
     }
 }

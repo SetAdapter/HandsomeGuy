@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -36,11 +35,9 @@ import com.example.administrator.handsomeguy.fragment.BookClassifyFragment;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.model.MainMenuBean;
 import com.example.handsomelibrary.utils.JumpUtils;
-import com.example.handsomelibrary.utils.SystemUtils;
 import com.example.handsomelibrary.view.ResideLayout;
 import com.example.handsomelibrary.view.theme.ColorRelativeLayout;
 import com.example.handsomelibrary.view.theme.ColorUiUtil;
-import com.example.handsomelibrary.view.theme.ColorView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,9 +88,8 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        //initStatusBar();
-        setState(true);
-        setTitle(true);
+//        setState(true);
+//        setTitle(true);
         fragmentManager = getSupportFragmentManager();
         initMenu();
         switchFragment("分类");
@@ -168,6 +164,9 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     @Override
     protected void onResume() {
         super.onResume();
+        if(mResideLayout.isOpen()){
+            mResideLayout.closePane();
+        }
         Glide.with(mContext).load(R.mipmap.img_header)
                 .apply(new RequestOptions().transform(new CircleCrop()).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
                 .into(mIvAvatar);
@@ -179,13 +178,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_avatar:
-                String username = SharedPreUtils.getInstance()
-                        .getString("username", "");
-                if (username.equals("")) {
                     JumpUtils.jump(mContext,LoginActivity.class,null);
-                } else {
-                    //startActivity(UserInfoActivity.class);
-                }
                 break;
             case R.id.tv_theme:
                 new ColorChooserDialog.Builder(this, R.string.theme)
@@ -342,17 +335,5 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
      */
     public void setLeftSlide(boolean isCanSlide) {
         mResideLayout.setCanLeftSlide(isCanSlide);
-    }
-
-    private ColorView mStatusBar;
-    private void initStatusBar() {
-        mStatusBar = findViewById(R.id.status_bar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mStatusBar.setVisibility(View.VISIBLE);
-            mStatusBar.getLayoutParams().height = SystemUtils.getStatusHeight(this);
-            mStatusBar.setLayoutParams(mStatusBar.getLayoutParams());
-        } else {
-            mStatusBar.setVisibility(View.GONE);
-        }
     }
 }

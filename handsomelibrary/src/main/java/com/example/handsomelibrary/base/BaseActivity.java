@@ -1,6 +1,7 @@
 package com.example.handsomelibrary.base;
 
 import android.app.Dialog;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +9,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.handsomelibrary.R;
+import com.example.handsomelibrary.utils.SystemUtils;
 import com.example.handsomelibrary.utils.cache.ACache;
+import com.example.handsomelibrary.view.theme.ColorView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,11 +23,13 @@ import java.util.Map;
  */
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public static final String USERNAME="水 户 洋 平";
-    public static final String PASSWORD="fan851248";
+    public static final String USERNAME="520";
+    public static final String PASSWORD="1314";
     protected ACache mCache;
     public Dialog loading_dialog;
     protected BaseActivity  mContext;
+
+    private ColorView mStatusBar;
 
     /**
      * 获取TAG的activity名称
@@ -56,6 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         BaseInitView();
         initData(savedInstanceState);
     }
+
     @Override
     public void onClick(View view) {
     }

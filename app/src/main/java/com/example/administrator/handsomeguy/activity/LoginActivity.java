@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity {
 //                if(userName.equals("")||passWord.equals("")){
 //                    T.showShort("请输入账号密码！");
 //                }
-                getLogin("水 户 洋 平", "fan851248");
+                getLogin(userName, passWord);
 
         }
     }
@@ -72,8 +72,10 @@ public class LoginActivity extends BaseActivity {
                 .compose(Transformer.<BaseBean<LoginBean>>switchSchedulers(loading_dialog))
                 .subscribe(new CommonObserver<BaseBean<LoginBean>>(loading_dialog) {
                     @Override
-                    protected void onSuccess(BaseBean<LoginBean> stringBaseBean) {
+                    protected void onSuccess(BaseBean<LoginBean> loginBean) {
                         if (userName.equals(USERNAME) && passWord.equals(PASSWORD)) {
+                            SharedPreUtils.getInstance().putString("token", loginBean.getData().getToken());
+                            SharedPreUtils.getInstance().putString("username", loginBean.getData().getName());
                             JumpUtils.jump(mContext, MainActivity.class, null);
                             finish();
                         } else {

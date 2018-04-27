@@ -24,5 +24,10 @@
         <item>女生</item>
         <item>出版</item>
     </array>
+    <array name="classify_list">
+        <item>热门</item>
+        <item>新书</item>
+        <item>好评</item>
+    </array>
 
 </resources>

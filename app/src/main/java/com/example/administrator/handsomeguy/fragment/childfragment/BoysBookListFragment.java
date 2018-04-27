@@ -1,12 +1,15 @@
 package com.example.administrator.handsomeguy.fragment.childfragment;
 
 import android.app.Dialog;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.handsomeguy.R;
+import com.example.administrator.handsomeguy.activity.BookListActivity;
 import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
 import com.example.administrator.handsomeguy.fragment.adapter.BoysBookListAdapter;
 import com.example.handsomelibrary.api.ApiService;
@@ -16,6 +19,7 @@ import com.example.handsomelibrary.model.BaseBean;
 import com.example.handsomelibrary.model.ClassifyBean;
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import com.example.handsomelibrary.retrofit.observer.CommonObserver;
+import com.example.handsomelibrary.utils.JumpUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +54,14 @@ public class BoysBookListFragment extends BaseFragment {
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rv_bookList.setLayoutManager(new LinearLayoutManager(mContext));
         rv_bookList.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle=new Bundle();
+                bundle.putString("titleName",beanList.get(position).getName());
+                JumpUtils.jump(mContext, BookListActivity.class,bundle);
+            }
+        });
     }
 
     private void getClassify() {
@@ -63,6 +75,7 @@ public class BoysBookListFragment extends BaseFragment {
                         if(null!=classifyBean){
                             adapter.setNewData(classifyBean.getData().getMale());
                             mCache.put("classifyBean",classifyBean.getData());
+                            beanList=classifyBean.getData().getMale();
                         }
                     }
 

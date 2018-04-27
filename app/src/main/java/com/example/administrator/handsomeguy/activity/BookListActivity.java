@@ -1,52 +1,50 @@
-package com.example.administrator.handsomeguy.fragment;
+package com.example.administrator.handsomeguy.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.administrator.handsomeguy.MainActivity;
 import com.example.administrator.handsomeguy.R;
-import com.example.administrator.handsomeguy.fragment.childfragment.BoysBookListFragment;
-import com.example.administrator.handsomeguy.fragment.childfragment.GirlBookListFragment;
-import com.example.administrator.handsomeguy.fragment.childfragment.PublishListFragment;
-import com.example.handsomelibrary.base.BaseFragment;
+import com.example.administrator.handsomeguy.fragment.HotBookFragment;
+import com.example.administrator.handsomeguy.fragment.NewBookFragment;
+import com.example.administrator.handsomeguy.fragment.PraiseFragment;
+import com.example.handsomelibrary.base.BaseActivity;
 import com.gigamole.navigationtabstrip.NavigationTabStrip;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
-/**
- * 小说分类 Fragment
- * Created by Stefan on 2018/4/26.
- */
-
-public class BookClassifyFragment extends BaseFragment{
+public class BookListActivity extends BaseActivity {
     @BindView(R.id.nts_classify)
     NavigationTabStrip nts_classify;
     @BindView(R.id.vp_classify)
     ViewPager vp_classify;
+
     private List<Fragment> mFragments;
+    public static String titleName;
 
-    public static BookClassifyFragment newInstance() {
-        BookClassifyFragment fragment = new BookClassifyFragment();
-        return fragment;
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_book_list;
     }
 
     @Override
-    protected int getLayoutID() {
-        return R.layout.fragment_book_classify;
-    }
+    protected void initData(Bundle savedInstanceState) {
 
-    @Override
-    protected void initData() {
+        titleName = getIntent().getExtras().getString("titleName");
+
         mFragments = new ArrayList<>();
-        mFragments.add(new BoysBookListFragment());
-        mFragments.add(new GirlBookListFragment());
-        mFragments.add(new PublishListFragment());
-
-        vp_classify.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
+        mFragments.add(new HotBookFragment());
+        mFragments.add(new NewBookFragment());
+        mFragments.add(new PraiseFragment());
+        vp_classify.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 return mFragments.get(position);
@@ -62,7 +60,7 @@ public class BookClassifyFragment extends BaseFragment{
                 return getResources().getStringArray(R.array.book_classify)[position];
             }
         });
-        nts_classify.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        vp_classify.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (positionOffset == 0 || positionOffsetPixels == 0) {
@@ -72,7 +70,6 @@ public class BookClassifyFragment extends BaseFragment{
 
             @Override
             public void onPageSelected(int position) {
-                ((MainActivity)getActivity()).setLeftSlide(position==0);
                 vp_classify.setCurrentItem(position);
             }
 
@@ -82,7 +79,16 @@ public class BookClassifyFragment extends BaseFragment{
             }
         });
         vp_classify.setOffscreenPageLimit(4);
-        nts_classify.setTitles(getResources().getStringArray(R.array.book_classify));
+        nts_classify.setTitles(getResources().getStringArray(R.array.classify_list));
         nts_classify.setViewPager(vp_classify);
+    }
+
+    @OnClick({R.id.tv_back})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.tv_back:
+                finish();
+                break;
+        }
     }
 }

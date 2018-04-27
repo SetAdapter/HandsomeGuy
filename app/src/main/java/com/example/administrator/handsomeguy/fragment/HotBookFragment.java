@@ -66,13 +66,21 @@ public class HotBookFragment extends BaseFragment implements OnRefreshLoadmoreLi
                 .subscribe(new CommonObserver<BaseBean<List<BookBean>>>() {
                     @Override
                     protected void onSuccess(BaseBean<List<BookBean>> listBaseBean) {
-                        refresh.finishRefresh();
-                        refresh.finishLoadmore();
                         if(listBaseBean!=null&&listBaseBean.getData().size()!=0){
-                            adapter.addData(listBaseBean.getData());
+                            if(refresh.isRefreshing()){
+                                adapter.setNewData(listBaseBean.getData());
+                                refresh.finishRefresh();
+                            }else if(refresh.isLoading()){
+                                adapter.addData(listBaseBean.getData());
+                                refresh.finishLoadmore();
+                            }else {
+                                adapter.setNewData(listBaseBean.getData());
+                            }
                         }else {
                             T.showShort("无更多书籍");
                         }
+
+
 
                     }
 
@@ -96,6 +104,16 @@ public class HotBookFragment extends BaseFragment implements OnRefreshLoadmoreLi
         map.put("app-type", "Android");
 //        map.put("version-code", WYApplication.packageInfo.versionCode);
         return map;
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (refresh.isRefreshing()) {
+            refresh.finishRefresh();
+        }
+        if (refresh.isLoading()) {
+            refresh.finishLoadmore();
+        }
     }
 
     @Override

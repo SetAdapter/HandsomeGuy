@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.administrator.handsomeguy.activity.AboutAuthorActivity;
 import com.example.administrator.handsomeguy.activity.LoginActivity;
 import com.example.administrator.handsomeguy.adapter.MainMenuAdapter;
 import com.example.administrator.handsomeguy.apputils.BaseUtils;
@@ -104,6 +106,24 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
         mRvMenu.setLayoutManager(new LinearLayoutManager(mContext));
         mainMenuAdapter = new MainMenuAdapter(menuBeans);
         mRvMenu.setAdapter(mainMenuAdapter);
+        mainMenuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                String name = menuBeans.get(position).getName();
+                switch (name){
+                    case "扫描书籍":
+                        break;
+                    case "书架":
+                        break;
+                    case "意见反馈":
+                        break;
+                    case "关于作者":
+                        JumpUtils.jump(mContext,AboutAuthorActivity.class,null);
+                        mResideLayout.closePane();
+                        break;
+                }
+            }
+        });
     }
     //侧边菜单设置
     private List<MainMenuBean> getMenuData() {

@@ -5,4 +5,10 @@
     <string name="cancel">取消</string>
     <string name="done">完成</string>
     <string name="theme">主题</string>
+
+    <string name="about"> \t\t\t在公司的正式项目空窗期，完全没事做，闲的蛋疼时候写的(老板必须不能知道（滑稽脸）) 。
+                            这是一个简单的小说阅读的项目，数据是爬取追书神器的部分数据(当然不是我干的...)，
+                          这个项目算是总结了一下自己所积累的开发技术,当然我还是很菜的，此项目算是站在前辈的肩膀上，
+                            偷懒依赖了很多第三方库，emmm 写这玩意算给自己练练手吧。\n \t\t\t最后，
+                    谢谢《微Yue》的作者LiangLuDev 提供的开源库 还有RxHttpUtils网络框架的作者lygttpod</string>
 </resources>

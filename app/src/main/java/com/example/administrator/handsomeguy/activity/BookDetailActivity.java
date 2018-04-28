@@ -149,7 +149,7 @@ public class BookDetailActivity extends BaseActivity {
 //            showTagDialog(tag);
 //            return true;
 //        });
-        }else {
+        } else {
             mLlTag.setVisibility(View.GONE);
             mFlTags.setVisibility(View.GONE);
         }
@@ -184,11 +184,14 @@ public class BookDetailActivity extends BaseActivity {
         return map;
     }
 
-    @OnClick({R.id.tv_back})
+    @OnClick({R.id.tv_back, R.id.crl_start_read})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_back:
                 JumpUtils.exitActivity(this);
+                break;
+            case R.id.crl_start_read:
+                JumpUtils.jump(mContext,ReaderActivity.class,null);
                 break;
         }
     }

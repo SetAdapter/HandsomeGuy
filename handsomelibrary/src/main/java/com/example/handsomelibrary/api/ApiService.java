@@ -14,6 +14,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -31,6 +32,16 @@ public interface ApiService {
      */
     @GET(WEIYUE_URL+"api/user/login")
     Observable<BaseBean<LoginBean>> login(@Query("name") String username, @Query("password") String password);
+
+
+    /**
+     * 获取书籍信息
+     * http://120.55.57.236/books/{bookId}
+     * @param bookId
+     * @return
+     */
+    @GET("api/books/{bookId} ")
+    Observable<BaseBean<BookBean>> bookInfo(@Path("bookId") String bookId);
 
     /**
      * 获取分类下的书籍

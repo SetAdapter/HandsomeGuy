@@ -53,7 +53,7 @@ public class BookBean {
     private boolean isCollect;
     private RatingBean rating;
     private String copyright;
-    private List<?> tags;
+    private List<String> tags;
     private List<String> gender;
 
     public String get_id() {
@@ -216,11 +216,11 @@ public class BookBean {
         this.copyright = copyright;
     }
 
-    public List<?> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<?> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 

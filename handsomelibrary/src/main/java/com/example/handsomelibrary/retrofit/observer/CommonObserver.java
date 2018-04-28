@@ -57,7 +57,7 @@ public abstract class CommonObserver<T> extends BaseObserver<T> {
     }
 
     @Override
-    public void doOnNext(T t) {
+    public void doOnNext(T t)    {
         onSuccess(t);
     }
 

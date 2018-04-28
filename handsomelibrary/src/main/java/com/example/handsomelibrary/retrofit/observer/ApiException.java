@@ -33,6 +33,17 @@ public class ApiException extends Exception {
         this.message = throwable.getMessage();
     }
 
+    public ApiException(String message, int code) {
+        super(message);
+        this.code = code;
+    }
+
+//    public ApiException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace, int code, String message1) {
+//        super(message, cause, enableSuppression, writableStackTrace);
+//        this.code = code;
+//        this.message = message1;
+//    }
+
     public int getCode() {
         return code;
     }

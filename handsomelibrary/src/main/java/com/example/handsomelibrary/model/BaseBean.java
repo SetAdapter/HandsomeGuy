@@ -7,17 +7,33 @@ import java.io.Serializable;
  * Created by fangs on 2017/11/6.
  */
 public class BaseBean<T> implements Serializable{
-
-
     /**
-     * data : ...
-     * errorCode : 0
-     * errorMsg :
+     * code : 10000
+     * msg : 请求成功
+     * data : [{}]
      */
 
+    private int code;
+    private String msg;
     private T data;
-    private int errorCode;
-    private String errorMsg;
+
+
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public T getData() {
         return data;
@@ -27,19 +43,20 @@ public class BaseBean<T> implements Serializable{
         this.data = data;
     }
 
-    public int getErrorCode() {
-        return errorCode;
+    /**
+     * 判断请求是否成功
+     * @return
+     */
+    public boolean isSuccess(){
+        return code == 10000;
     }
 
-    public void setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
+    @Override
+    public String toString() {
+        return "BaseBean{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

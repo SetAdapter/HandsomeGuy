@@ -1,10 +1,15 @@
 package com.example.administrator.handsomeguy.fragment;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.handsomeguy.R;
+import com.example.administrator.handsomeguy.activity.BookDetailActivity;
 import com.example.administrator.handsomeguy.activity.BookListActivity;
 import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
 import com.example.administrator.handsomeguy.fragment.adapter.BookListAdapter;
@@ -55,28 +60,45 @@ public class NewBookFragment extends BaseFragment implements OnRefreshLoadmoreLi
         rv_bookList.setLayoutManager(new LinearLayoutManager(mContext));
         rv_bookList.setAdapter(adapter);
         refresh.autoRefresh();
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                BookBean item = (BookBean)adapter.getData().get(position);
+                Intent intent=new Intent();
+                intent.setClass(mContext, BookDetailActivity.class);
+                intent.putExtra("bookid", item.get_id());
+                if (android.os.Build.VERSION.SDK_INT > 20) {
+                    ImageView imageView = view.findViewById(R.id.iv_bookImg);
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(), imageView, "bookImage").toBundle());
+                } else {
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void getHotBookList(int loadPage) {
         RxHttpUtils.getSingleInstance().addHeaders(tokenMap())
                 .createSApi(ApiService.class)
                 .bookList("new",titleName,loadPage)
-                .compose(Transformer.<BaseBean<List<BookBean>>>switchSchedulers())
-                .subscribe(new CommonObserver<BaseBean<List<BookBean>>>() {
+                .compose(Transformer.<List<BookBean>>switchSchedulers())
+                .subscribe(new CommonObserver<List<BookBean>>() {
                     @Override
-                    protected void onSuccess(BaseBean<List<BookBean>> listBaseBean) {
-                        if(listBaseBean!=null&&listBaseBean.getData().size()!=0){
+                    protected void onSuccess(List<BookBean> listBaseBean) {
+                        if(listBaseBean!=null&&listBaseBean.size()!=0){
                             if(refresh.isRefreshing()){
-                                adapter.setNewData(listBaseBean.getData());
+                                adapter.setNewData(listBaseBean);
                                 refresh.finishRefresh();
                             }else if(refresh.isLoading()){
-                                adapter.addData(listBaseBean.getData());
+                                adapter.addData(listBaseBean);
                                 refresh.finishLoadmore();
                             }else {
-                                adapter.setNewData(listBaseBean.getData());
+                                adapter.setNewData(listBaseBean);
                             }
                         }else {
                             T.showShort("无更多书籍");
+                            refresh.finishRefresh();
+                            refresh.finishLoadmore();
                         }
 
                     }

@@ -1,10 +1,18 @@
 package com.example.administrator.handsomeguy.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.handsomeguy.R;
+import com.example.administrator.handsomeguy.activity.BookDetailActivity;
 import com.example.administrator.handsomeguy.activity.BookListActivity;
 import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
 import com.example.administrator.handsomeguy.fragment.adapter.BookListAdapter;
@@ -15,6 +23,7 @@ import com.example.handsomelibrary.model.BaseBean;
 import com.example.handsomelibrary.model.BookBean;
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import com.example.handsomelibrary.retrofit.observer.CommonObserver;
+import com.example.handsomelibrary.utils.JumpUtils;
 import com.example.handsomelibrary.utils.T;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -32,6 +41,7 @@ import butterknife.BindView;
  * Created by Stefan on 2018/4/26.
  */
 
+@SuppressLint("ValidFragment")
 public class HotBookFragment extends BaseFragment implements OnRefreshLoadmoreListener{
     @BindView(R.id.rv_bookList)
     RecyclerView rv_bookList;
@@ -56,32 +66,46 @@ public class HotBookFragment extends BaseFragment implements OnRefreshLoadmoreLi
         rv_bookList.setLayoutManager(new LinearLayoutManager(mContext));
         rv_bookList.setAdapter(adapter);
         refresh.autoRefresh();
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                BookBean item = (BookBean)adapter.getData().get(position);
+                Intent intent=new Intent();
+                intent.setClass(mContext, BookDetailActivity.class);
+                intent.putExtra("bookid", item.get_id());
+                if (android.os.Build.VERSION.SDK_INT > 20) {
+                    ImageView imageView = view.findViewById(R.id.iv_bookImg);
+                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(getActivity(), imageView, "bookImage").toBundle());
+                } else {
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void getHotBookList(int loadPage) {
         RxHttpUtils.getSingleInstance().addHeaders(tokenMap())
                 .createSApi(ApiService.class)
                 .bookList("hot",titleName,loadPage)
-                .compose(Transformer.<BaseBean<List<BookBean>>>switchSchedulers())
-                .subscribe(new CommonObserver<BaseBean<List<BookBean>>>() {
+                .compose(Transformer.<List<BookBean>>switchSchedulers())
+                .subscribe(new CommonObserver<List<BookBean>>() {
                     @Override
-                    protected void onSuccess(BaseBean<List<BookBean>> listBaseBean) {
-                        if(listBaseBean!=null&&listBaseBean.getData().size()!=0){
+                    protected void onSuccess(List<BookBean> listBaseBean) {
+                        if(listBaseBean!=null&&listBaseBean.size()!=0){
                             if(refresh.isRefreshing()){
-                                adapter.setNewData(listBaseBean.getData());
+                                adapter.setNewData(listBaseBean);
                                 refresh.finishRefresh();
                             }else if(refresh.isLoading()){
-                                adapter.addData(listBaseBean.getData());
+                                adapter.addData(listBaseBean);
                                 refresh.finishLoadmore();
                             }else {
-                                adapter.setNewData(listBaseBean.getData());
+                                adapter.setNewData(listBaseBean);
                             }
                         }else {
                             T.showShort("无更多书籍");
+                            refresh.finishRefresh();
+                            refresh.finishLoadmore();
                         }
-
-
-
                     }
 
                     @Override

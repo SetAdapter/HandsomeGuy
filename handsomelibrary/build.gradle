@@ -65,4 +65,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.0.0'
     //TabLayout
     compile 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
+    //折叠TextView
+    compile 'com.lcodecorex:extextview:1.0.2'
+    //FlowLayout 流式标签
+    compile 'com.hyman:flowlayout-lib:1.1.2'
 }

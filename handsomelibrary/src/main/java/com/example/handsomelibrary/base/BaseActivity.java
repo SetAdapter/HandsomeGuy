@@ -29,8 +29,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public Dialog loading_dialog;
     protected BaseActivity  mContext;
 
-    private ColorView mStatusBar;
-
     /**
      * 获取TAG的activity名称
      */

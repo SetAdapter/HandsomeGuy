@@ -11,6 +11,7 @@ import com.example.administrator.handsomeguy.fragment.HotBookFragment;
 import com.example.administrator.handsomeguy.fragment.NewBookFragment;
 import com.example.administrator.handsomeguy.fragment.PraiseFragment;
 import com.example.handsomelibrary.base.BaseActivity;
+import com.example.handsomelibrary.utils.JumpUtils;
 import com.gigamole.navigationtabstrip.NavigationTabStrip;
 
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class BookListActivity extends BaseActivity {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_back:
-                finish();
+                JumpUtils.exitActivity(this);
                 break;
         }
     }

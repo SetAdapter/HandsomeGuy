@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.handsomeguy.activity.AboutAuthorActivity">
-
-    <include layout="@layout/theme_toolbar" />
-
+    tools:context="com.example.administrator.handsomeguy.activity.AboutAuthorFragment">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

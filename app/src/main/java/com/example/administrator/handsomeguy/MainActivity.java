@@ -25,7 +25,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.administrator.handsomeguy.activity.AboutAuthorActivity;
+import com.example.administrator.handsomeguy.activity.AboutAuthorFragment;
 import com.example.administrator.handsomeguy.activity.LoginActivity;
 import com.example.administrator.handsomeguy.adapter.MainMenuAdapter;
 import com.example.administrator.handsomeguy.apputils.BaseUtils;
@@ -34,6 +34,7 @@ import com.example.administrator.handsomeguy.apputils.SnackBarUtils;
 import com.example.administrator.handsomeguy.apputils.Theme;
 import com.example.administrator.handsomeguy.apputils.ThemeUtils;
 import com.example.administrator.handsomeguy.fragment.BookClassifyFragment;
+import com.example.administrator.handsomeguy.fragment.BookShelfFragment;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.model.MainMenuBean;
 import com.example.handsomelibrary.utils.JumpUtils;
@@ -113,12 +114,17 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
                 switch (name){
                     case "扫描书籍":
                         break;
+                    case "分类":switchFragment(name);
+                        mResideLayout.closePane();
+                        break;
                     case "书架":
+                        switchFragment(name);
+                        mResideLayout.closePane();
                         break;
                     case "意见反馈":
                         break;
                     case "关于作者":
-                        JumpUtils.jump(mContext,AboutAuthorActivity.class,null);
+                        switchFragment(name);
                         mResideLayout.closePane();
                         break;
                 }
@@ -158,12 +164,15 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
                 case "分类":
                     foundFragment = BookClassifyFragment.newInstance();
                     break;
-//                case "书架":
-//                    foundFragment = BookShelfFragment.newInstance();
+                case "书架":
+                    foundFragment = BookShelfFragment.newInstance();
 //                    break;
 //                case "扫描书籍":
 //                    foundFragment = ScanBookFragment.newInstance();
 //                    break;
+                case "关于作者":
+                    foundFragment=AboutAuthorFragment.newInstance();
+                    break;
                 default:
 //                    foundFragment = BookShelfFragment.newInstance();
                     break;

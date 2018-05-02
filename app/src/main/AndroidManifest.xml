@@ -43,7 +43,7 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.BookListActivity" />
         <activity android:name=".activity.BookDetailActivity" />
-        <activity android:name=".activity.AboutAuthorActivity" />
+        <activity android:name=".activity.AboutAuthorFragment" />
         <activity android:name=".activity.ReaderActivity"></activity>
     </application>
 

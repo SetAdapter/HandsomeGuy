@@ -1,4 +1,4 @@
-package com.example.administrator.handsomeguy.apputils.page;
+package com.example.administrator.handsomeguy.apputils.apputils.page;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,12 +12,15 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 
 import com.example.administrator.handsomeguy.R;
-import com.example.administrator.handsomeguy.apputils.IOUtils;
-import com.example.administrator.handsomeguy.apputils.ReadSettingManager;
-import com.example.administrator.handsomeguy.apputils.RxUtils;
-import com.example.administrator.handsomeguy.apputils.ScreenUtils;
-import com.example.administrator.handsomeguy.apputils.StringUtils;
+import com.example.administrator.handsomeguy.apputils.helper.BookRecordHelper;
+import com.example.administrator.handsomeguy.apputils.apputils.IOUtils;
+import com.example.administrator.handsomeguy.apputils.apputils.ReadSettingManager;
+import com.example.administrator.handsomeguy.apputils.apputils.ScreenUtils;
+import com.example.administrator.handsomeguy.apputils.apputils.StringUtils;
 import com.example.handsomelibrary.application.BaseApp;
+import com.example.handsomelibrary.model.BookChapterBean;
+import com.example.handsomelibrary.model.BookRecordBean;
+import com.example.handsomelibrary.model.gen.CollBookBean;
 import com.example.handsomelibrary.utils.T;
 
 import java.io.BufferedReader;
@@ -27,10 +30,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -56,8 +55,8 @@ public abstract class PageLoader {
     private static final int EXTRA_TITLE_SIZE = 4;
     //当前章节列表
     protected List<TxtChapter> mChapterList;
-    //TODO 书本对象
-   // protected CollBookBean mCollBook;
+    // 书本对象
+    protected CollBookBean mCollBook;
     //监听器
     protected OnPageChangeListener mPageChangeListener;
 
@@ -428,61 +427,64 @@ public abstract class PageLoader {
         return mCurPage.position;
     }
 
+    //存储阅读记录类
+    private BookRecordBean mBookRecord;
+
     //保存阅读记录
     public void saveRecord() {
         //TODO 书没打开，就没有记录
         if (!isBookOpen) return;
 
-//        mBookRecord.setBookId(mCollBook.get_id());
-//        mBookRecord.setChapter(mCurChapterPos);
-//        mBookRecord.setPagePos(mCurPage.position);
-//
-//        //存储到数据库
-//        BookRecordHelper.getsInstance().saveRecordBook(mBookRecord);
+        mBookRecord.setBookId(mCollBook.get_id());
+        mBookRecord.setChapter(mCurChapterPos);
+        mBookRecord.setPagePos(mCurPage.position);
+
+        //存储到数据库
+        BookRecordHelper.getsInstance().saveRecordBook(mBookRecord);
     }
 
     //TODO 打开书本，初始化书籍
-//    public void openBook(CollBookBean collBook) {
-//        mCollBook = collBook;
-//        //init book record
-//
-//        //从数据库取阅读数据
-//        mBookRecord = BookRecordHelper.getsInstance()
-//                .findBookRecordById(mCollBook.get_id());
-//        if (mBookRecord == null) {
-//            mBookRecord = new BookRecordBean();
-//        }
-//
-//        mCurChapterPos = mBookRecord.getChapter();
-//        mLastChapter = mCurChapterPos;
-  //  }
+    public void openBook(CollBookBean collBook) {
+        mCollBook = collBook;
+        //init book record
+
+        //从数据库取阅读数据
+        mBookRecord = BookRecordHelper.getsInstance()
+                .findBookRecordById(mCollBook.get_id());
+        if (mBookRecord == null) {
+            mBookRecord = new BookRecordBean();
+        }
+
+        mCurChapterPos = mBookRecord.getChapter();
+        mLastChapter = mCurChapterPos;
+    }
 
     //TODO 打开具体章节
-//    public void openChapter() {
-//        mCurPageList = loadPageList(mCurChapterPos);
-//        //进行预加载
-//        preLoadNextChapter();
-//        //加载完成
-//        mStatus = STATUS_FINISH;
-//        //获取制定页面
-//        if (!isBookOpen) {
-//            isBookOpen = true;
-//            //可能会出现当前页的大小大于记录页的情况。
-//            int position = mBookRecord.getPagePos();
-//            if (position >= mCurPageList.size()) {
-//                position = mCurPageList.size() - 1;
-//            }
-//            mCurPage = getCurPage(position);
-//            mCancelPage = mCurPage;
-//            if (mPageChangeListener != null) {
-//                mPageChangeListener.onChapterChange(mCurChapterPos);
-//            }
-//        } else {
-//            mCurPage = getCurPage(0);
-//        }
-//
-//        mPageView.drawCurPage(false);
-//    }
+    public void openChapter() {
+        mCurPageList = loadPageList(mCurChapterPos);
+        //进行预加载
+        preLoadNextChapter();
+        //加载完成
+        mStatus = STATUS_FINISH;
+        //获取制定页面
+        if (!isBookOpen) {
+            isBookOpen = true;
+            //可能会出现当前页的大小大于记录页的情况。
+            int position = mBookRecord.getPagePos();
+            if (position >= mCurPageList.size()) {
+                position = mCurPageList.size() - 1;
+            }
+            mCurPage = getCurPage(position);
+            mCancelPage = mCurPage;
+            if (mPageChangeListener != null) {
+                mPageChangeListener.onChapterChange(mCurChapterPos);
+            }
+        } else {
+            mCurPage = getCurPage(0);
+        }
+
+        mPageView.drawCurPage(false);
+    }
 
     public void chapterError() {
         //加载错误
@@ -502,7 +504,7 @@ public abstract class PageLoader {
 
     /*******************************abstract method***************************************/
     //TODO 设置章节
-   // public abstract void setChapterList(List<BookChapterBean> bookChapters);
+    public abstract void setChapterList(List<BookChapterBean> bookChapters);
 
     @Nullable
     protected abstract List<TxtPage> loadPageList(int chapter);

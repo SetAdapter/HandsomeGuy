@@ -1,4 +1,4 @@
-package com.example.administrator.handsomeguy.apputils.page;
+package com.example.administrator.handsomeguy.apputils.apputils.page;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,14 +9,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.example.administrator.handsomeguy.apputils.ScreenUtils;
-import com.example.administrator.handsomeguy.apputils.animation.CoverPageAnim;
-import com.example.administrator.handsomeguy.apputils.animation.HorizonPageAnim;
-import com.example.administrator.handsomeguy.apputils.animation.NonePageAnim;
-import com.example.administrator.handsomeguy.apputils.animation.PageAnimation;
-import com.example.administrator.handsomeguy.apputils.animation.ScrollPageAnim;
-import com.example.administrator.handsomeguy.apputils.animation.SimulationPageAnim;
-import com.example.administrator.handsomeguy.apputils.animation.SlidePageAnim;
+import com.example.administrator.handsomeguy.apputils.apputils.ScreenUtils;
+import com.example.administrator.handsomeguy.apputils.apputils.animation.CoverPageAnim;
+import com.example.administrator.handsomeguy.apputils.apputils.animation.HorizonPageAnim;
+import com.example.administrator.handsomeguy.apputils.apputils.animation.NonePageAnim;
+import com.example.administrator.handsomeguy.apputils.apputils.animation.PageAnimation;
+import com.example.administrator.handsomeguy.apputils.apputils.animation.ScrollPageAnim;
+import com.example.administrator.handsomeguy.apputils.apputils.animation.SimulationPageAnim;
+import com.example.administrator.handsomeguy.apputils.apputils.animation.SlidePageAnim;
 
 
 /**
@@ -98,7 +98,7 @@ public class PageView extends View {
         //重置图片的大小,由于w,h可能比原始的Bitmap更大，所以如果使用Bitmap.setWidth/Height()是会报错的。
         //所以最终还是创建Bitmap的方式。这种方式比较消耗性能，暂时没有找到更好的方法。
         setPageMode(mPageMode);
-        //重置页面加载器的页面
+        //TODO 重置页面加载器的页面
         mPageLoader.setDisplaySize(w,h);
         //初始化完成
         isPrepare = true;
@@ -351,10 +351,10 @@ public class PageView extends View {
     public PageLoader getPageLoader(boolean isLocal){
         if (mPageLoader == null){
             if (isLocal){
-               // mPageLoader = new LocalPageLoader(this);
+                mPageLoader = new LocalPageLoader(this);
             }
             else {
-               // mPageLoader = new NetPageLoader(this);
+                mPageLoader = new NetPageLoader(this);
             }
         }
         return mPageLoader;

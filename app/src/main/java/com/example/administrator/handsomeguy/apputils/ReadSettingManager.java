@@ -1,7 +1,7 @@
 package com.example.administrator.handsomeguy.apputils;
 
 
-import com.example.administrator.handsomeguy.apputils.page.PageView;
+import com.example.administrator.handsomeguy.apputils.apputils.page.PageView;
 
 /**
  * Created by newbiechen on 17-5-17.

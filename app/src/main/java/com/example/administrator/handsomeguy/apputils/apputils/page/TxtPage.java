@@ -1,4 +1,4 @@
-package com.example.administrator.handsomeguy.apputils.page;
+package com.example.administrator.handsomeguy.apputils.apputils.page;
 
 import java.util.List;
 

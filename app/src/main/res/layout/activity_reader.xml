@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_19"
-            android:visibility="visible"
+            android:visibility="gone"
             tools:visibility="visible">
 
 
@@ -45,13 +45,13 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <!--阅读页面-->
-        <!--<com.example.administrator.handsomeguy.apputils.page.PageView-->
-        <!--android:id="@+id/pv_read_page"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:clickable="true"-->
-        <!--tools:visibility="gone"/>-->
+        阅读页面
+        <com.example.administrator.handsomeguy.apputils.apputils.page.PageView
+        android:id="@+id/pv_read_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        tools:visibility="gone"/>
 
         <!--切换页面提示-->
         <TextView
@@ -80,7 +80,7 @@
             android:background="@color/color_19"
             android:clickable="true"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             tools:visibility="visible">
 
             <!--页面进度栏-->

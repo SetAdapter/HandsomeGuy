@@ -1,4 +1,4 @@
-package com.example.administrator.handsomeguy.apputils.page;
+package com.example.administrator.handsomeguy.apputils.apputils.page;
 
 /**
  * Created by newbiechen on 17-7-1.

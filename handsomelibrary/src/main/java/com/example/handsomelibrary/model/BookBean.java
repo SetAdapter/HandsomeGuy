@@ -1,5 +1,7 @@
 package com.example.handsomelibrary.model;
 
+import com.example.handsomelibrary.model.gen.CollBookBean;
+
 import java.util.List;
 
 /**
@@ -266,6 +268,31 @@ public class BookBean {
         public void setIsEffect(boolean isEffect) {
             this.isEffect = isEffect;
         }
+    }
+
+    private CollBookBean mCollBookBean;
+
+    public CollBookBean getCollBookBean() {
+        if (mCollBookBean == null) {
+            mCollBookBean = createCollBookBean();
+        }
+        return mCollBookBean;
+    }
+
+    public CollBookBean createCollBookBean() {
+        CollBookBean bean = new CollBookBean();
+        bean.set_id(get_id());
+        bean.setTitle(getTitle());
+        bean.setAuthor(bean.getAuthor());
+        bean.setShortIntro(getLongIntro());
+        bean.setCover(getCover());
+//        bean.setHasCp(isHasCp());
+        bean.setLatelyFollower(getLatelyFollower());
+        bean.setRetentionRatio(Double.parseDouble(getRetentionRatio()));
+        bean.setUpdated(getUpdated());
+        bean.setChaptersCount(getChaptersCount());
+        bean.setLastChapter(getLastChapter());
+        return bean;
     }
 
 }

@@ -12,12 +12,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.administrator.handsomeguy.R;
 import com.example.administrator.handsomeguy.apputils.BaseUtils;
 import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
+import com.example.administrator.handsomeguy.apputils.apputils.CollBookHelper;
 import com.example.handsomelibrary.api.ApiService;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.interceptor.Transformer;
 import com.example.handsomelibrary.model.BaseBean;
 import com.example.handsomelibrary.model.BookBean;
 import com.example.handsomelibrary.model.LoginBean;
+import com.example.handsomelibrary.model.gen.CollBookBean;
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import com.example.handsomelibrary.retrofit.observer.CommonObserver;
 import com.example.handsomelibrary.utils.JumpUtils;
@@ -76,8 +78,8 @@ public class BookDetailActivity extends BaseActivity {
     TextView mTvRead;
 
     private String bookid;
-
-//    private BookBean mBookBean;
+    private CollBookBean mCollBookBean;
+    private BookBean bookBean;
 //    IBookData bookData;
 //    public interface IBookData{
 //        void getBookInfo(BookBean bookBean);
@@ -144,10 +146,13 @@ public class BookDetailActivity extends BaseActivity {
                     return tv;
                 }
             });
-//        mFlTags.setOnTagClickListener((view, position, parent) -> {
-//            String tag = bookBean.getTags().get(position);
-//            showTagDialog(tag);
-//            return true;
+//        mFlTags.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+//            @Override
+//            public boolean onTagClick(View view, int position, FlowLayout parent) {
+//                String tag = bookBean.getTags().get(position);
+//                showTagDialog(tag);
+//                return true;
+//            }
 //        });
         } else {
             mLlTag.setVisibility(View.GONE);
@@ -168,6 +173,17 @@ public class BookDetailActivity extends BaseActivity {
             mTvWordUpdatetime.setText(wordCount + "  |  " + time);
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+        //设置书籍
+        mCollBookBean = CollBookHelper.getsInstance().findBookById(bookBean.get_id());
+        if (bookBean.isIsCollect()) {
+            mCtvAddbook.setText("移除书架");
+        } else {
+            mCtvAddbook.setText("加入书架");
+        }
+
+        if (mCollBookBean == null) {
+            mCollBookBean = bookBean.getCollBookBean();
         }
     }
 
@@ -191,7 +207,10 @@ public class BookDetailActivity extends BaseActivity {
                 JumpUtils.exitActivity(this);
                 break;
             case R.id.crl_start_read:
-                JumpUtils.jump(mContext,ReaderActivity.class,null);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(ReaderActivity.EXTRA_COLL_BOOK, mCollBookBean);
+                bundle.putBoolean(ReaderActivity.EXTRA_IS_COLLECTED, false);
+                JumpUtils.jump(mContext,ReaderActivity.class,bundle);
                 break;
         }
     }

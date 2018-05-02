@@ -23,7 +23,7 @@ import retrofit2.http.Query;
  */
 
 public interface ApiService {
-    String WEIYUE_URL = "http://120.55.57.236/api/";
+    String WEIYUE_URL = "http://120.55.57.236/";
     String ZHUISHU_IMAGE_URL = "http://statics.zhuishushenqi.com";
     String BOOK_CACHE_PATH = FileUtils.getCachePath() + File.separator
             + "book_cache" + File.separator;
@@ -38,7 +38,7 @@ public interface ApiService {
      *
      * @return
      */
-    @GET(WEIYUE_URL + "user/login")
+    @GET(WEIYUE_URL + "api/user/login")
     Observable<BaseBean<LoginBean>> login(@Query("name") String username, @Query("password") String password);
 
 
@@ -49,7 +49,7 @@ public interface ApiService {
      * @param bookId
      * @return
      */
-    @GET("books/{bookId} ")
+    @GET("api/books/{bookId} ")
     Observable<BaseBean<BookBean>> bookInfo(@Path("bookId") String bookId);
 
     /**
@@ -57,7 +57,7 @@ public interface ApiService {
      *
      * @return
      */
-    @GET("classify")
+    @GET("api/classify")
     Observable<BaseBean<ClassifyBean.DataBean>> bookClassify();
 
     /**
@@ -68,7 +68,7 @@ public interface ApiService {
      * @param page
      * @return
      */
-    @GET("books")
+    @GET("api/books")
     Observable<BaseBean<List<BookBean>>> bookList(@Query("type") String type,
                                                   @Query("major") String major, @Query("page") int page);
 
@@ -80,7 +80,7 @@ public interface ApiService {
      * @param page
      * @return
      */
-    @GET("books/tag")
+    @GET("api/books/tag")
     Observable<BaseBean<List<BookBean>>> booksByTag(@Query("bookTag") String bookTag, @Query("page") int page);
 
     /**
@@ -89,7 +89,7 @@ public interface ApiService {
      * @param bookId
      * @return
      */
-    @GET("books/{bookId}/chapters")
+    @GET("api/books/{bookId}/chapters")
     Observable<BaseBean<BookChaptersBean>> bookChapters(@Path("bookId") String bookId);
 
 

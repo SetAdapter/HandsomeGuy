@@ -13,7 +13,10 @@ import java.io.File;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -101,5 +104,16 @@ public interface ApiService {
      */
     @GET("http://chapterup.zhuishushenqi.com/chapter/{link}")
     Observable<ChapterContentBean> bookContent(@Path("link") String link);
+
+    /**
+     * 用户反馈
+     * @param qq       qq
+     * @param feedback 反馈内容
+     * @return
+     */
+    @POST("api/feedback")
+    @FormUrlEncoded
+    Observable<BaseBean<String>> getFeedBack(@Field("qq") String qq, @Field("feedback") String feedback);
+
 
 }

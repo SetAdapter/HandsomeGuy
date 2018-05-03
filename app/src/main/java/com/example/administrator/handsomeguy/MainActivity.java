@@ -35,6 +35,7 @@ import com.example.administrator.handsomeguy.apputils.Theme;
 import com.example.administrator.handsomeguy.apputils.ThemeUtils;
 import com.example.administrator.handsomeguy.fragment.BookClassifyFragment;
 import com.example.administrator.handsomeguy.fragment.BookShelfFragment;
+import com.example.administrator.handsomeguy.fragment.FeedBackFragment;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.model.MainMenuBean;
 import com.example.handsomelibrary.utils.JumpUtils;
@@ -53,7 +54,7 @@ import butterknife.OnClick;
  * 首页
  * Created by Stefan on 2018/4/20 15:06.
  */
-public class MainActivity extends BaseActivity implements ColorChooserDialog.ColorCallback{
+public class MainActivity extends BaseActivity implements ColorChooserDialog.ColorCallback {
     @BindView(R.id.iv_avatar)
     ImageView mIvAvatar;
     @BindView(R.id.tv_desc)
@@ -85,7 +86,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 
 
     @Override
-    protected int getContentView()   {
+    protected int getContentView() {
         return R.layout.activity_main;
     }
 
@@ -111,10 +112,11 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String name = menuBeans.get(position).getName();
-                switch (name){
+                switch (name) {
                     case "扫描书籍":
                         break;
-                    case "分类":switchFragment(name);
+                    case "分类":
+                        switchFragment(name);
                         mResideLayout.closePane();
                         break;
                     case "书架":
@@ -122,6 +124,8 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
                         mResideLayout.closePane();
                         break;
                     case "意见反馈":
+                        switchFragment(name);
+                        mResideLayout.closePane();
                         break;
                     case "关于作者":
                         switchFragment(name);
@@ -131,6 +135,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
             }
         });
     }
+
     //侧边菜单设置
     private List<MainMenuBean> getMenuData() {
         menuBeans.clear();
@@ -166,12 +171,15 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
                     break;
                 case "书架":
                     foundFragment = BookShelfFragment.newInstance();
-//                    break;
+                    break;
+                case "意见反馈":
+                    foundFragment = FeedBackFragment.newInstance();
+                    break;
 //                case "扫描书籍":
 //                    foundFragment = ScanBookFragment.newInstance();
 //                    break;
                 case "关于作者":
-                    foundFragment=AboutAuthorFragment.newInstance();
+                    foundFragment = AboutAuthorFragment.newInstance();
                     break;
                 default:
 //                    foundFragment = BookShelfFragment.newInstance();
@@ -193,7 +201,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     @Override
     protected void onResume() {
         super.onResume();
-        if(mResideLayout.isOpen()){
+        if (mResideLayout.isOpen()) {
             mResideLayout.closePane();
         }
         Glide.with(mContext).load(R.mipmap.img_header)
@@ -203,11 +211,11 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
         mTvSetting.setText("设置");
     }
 
-    @OnClick({R.id.iv_avatar, R.id.tv_theme, R.id.tv_setting,R.id.tv_back})
+    @OnClick({R.id.iv_avatar, R.id.tv_theme, R.id.tv_setting, R.id.tv_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_avatar:
-                    JumpUtils.jump(mContext,LoginActivity.class,null);
+                JumpUtils.jump(mContext, LoginActivity.class, null);
                 break;
             case R.id.tv_theme:
                 new ColorChooserDialog.Builder(this, R.string.theme)
@@ -227,7 +235,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 //                }
                 break;
 
-            case  R.id.tv_back:
+            case R.id.tv_back:
                 mResideLayout.openPane();
                 break;
         }

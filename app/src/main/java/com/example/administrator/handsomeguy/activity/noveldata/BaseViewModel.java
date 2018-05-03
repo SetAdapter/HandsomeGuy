@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
 
 
 /**
- * Created by Liang_Lu on 2017/9/1.
+ * Created by Stefan on 2018/5/2.
  */
 
 public class BaseViewModel {

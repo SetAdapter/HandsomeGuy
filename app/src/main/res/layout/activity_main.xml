@@ -65,12 +65,12 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_setting"
+                android:id="@+id/tv_SignOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:padding="12dp"
-                android:text="设置"
+                android:text="退出"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 

@@ -25,7 +25,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Liang_Lu on 2017/12/11.
+ * Created by Stefan on 2018/5/2.
  */
 
 public class VMBookContentInfo extends BaseViewModel {

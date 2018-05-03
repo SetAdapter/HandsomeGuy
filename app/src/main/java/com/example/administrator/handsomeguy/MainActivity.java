@@ -1,6 +1,8 @@
 package com.example.administrator.handsomeguy;
 
 import android.animation.Animator;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,8 +69,8 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     RecyclerView mRvMenu;
     @BindView(R.id.tv_theme)
     TextView mTvTheme;
-    @BindView(R.id.tv_setting)
-    TextView mTvSetting;
+    @BindView(R.id.tv_SignOut)
+    TextView tv_SignOut;
     @BindView(R.id.bottom_menu)
     LinearLayout mBottomMenu;
     @BindView(R.id.menu)
@@ -83,6 +87,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     private FragmentManager fragmentManager;
     private String currentFragmentTag;
     private List<MainMenuBean> menuBeans = new ArrayList<>();
+    private String username;
 
 
     @Override
@@ -92,8 +97,6 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-//        setState(true);
-//        setTitle(true);
         fragmentManager = getSupportFragmentManager();
         initMenu();
         switchFragment("分类");
@@ -101,7 +104,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
 
     private void initMenu() {
         mTvDesc.setSelected(true);
-        BaseUtils.setIconDrawable(mTvSetting, R.drawable.vector_setting);
+        BaseUtils.setIconDrawable(tv_SignOut, R.drawable.vector_setting);
         BaseUtils.setIconDrawable(mTvTheme, R.drawable.vector_theme);
 
         getMenuData();
@@ -207,11 +210,20 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
         Glide.with(mContext).load(R.mipmap.img_header)
                 .apply(new RequestOptions().transform(new CircleCrop()).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true))
                 .into(mIvAvatar);
-        mTvDesc.setText("未登录");
-        mTvSetting.setText("设置");
+        username = mCache.getAsString("username");
+        if(username==null||username.equals("")){
+            mTvDesc.setText("未登录");
+        }else {
+            mTvDesc.setText(username);
+        }
+        if(mTvDesc.getText().toString().equals("未登录")||mTvDesc.getText().toString().equals("")){
+            tv_SignOut.setText("登录");
+        }else {
+            tv_SignOut.setText("退出");
+        }
     }
 
-    @OnClick({R.id.iv_avatar, R.id.tv_theme, R.id.tv_setting, R.id.tv_back})
+    @OnClick({R.id.iv_avatar, R.id.tv_theme, R.id.tv_SignOut, R.id.tv_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_avatar:
@@ -226,7 +238,22 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
                         .allowUserColorInputAlpha(false)
                         .show();
                 break;
-            case R.id.tv_setting:
+            case R.id.tv_SignOut:
+                if(tv_SignOut.getText().toString().equals("登录")){
+                    JumpUtils.jump(mContext,LoginActivity.class,null);
+                    finish();
+                }else if(tv_SignOut.getText().toString().equals("退出")){
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("超哥提示：")
+                            .setMessage("老铁确定退出吗？")
+                            .setCancelable(true)
+                            .setPositiveButton("确定", (dialog, which) -> {
+                                mCache.clear();
+                                dialog.dismiss();
+                                mTvDesc.setText("未登录");
+                                tv_SignOut.setText("登录");
+                            }).setNegativeButton("取消", (dialog, which) -> dialog.dismiss()).show();
+                }
 
 //                if (mUsername.equals("")) {
 //                    startActivity(LoginActivity.class);

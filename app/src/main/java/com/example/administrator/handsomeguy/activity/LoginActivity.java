@@ -76,6 +76,7 @@ public class LoginActivity extends BaseActivity {
                         if (userName.equals(USERNAME) && passWord.equals(PASSWORD)) {
                             SharedPreUtils.getInstance().putString("token", loginBean.getData().getToken());
                             SharedPreUtils.getInstance().putString("username", loginBean.getData().getName());
+                            mCache.put("username",loginBean.getData().getName());
                             JumpUtils.jump(mContext, MainActivity.class, null);
                             finish();
                         } else {

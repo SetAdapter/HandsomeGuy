@@ -5,7 +5,7 @@ import com.example.administrator.handsomeguy.dialog_interface.IBaseLoadView;
 import com.example.handsomelibrary.model.BookChaptersBean;
 
 /**
- * Created by Liang_Lu on 2017/12/11.
+ * Created by Stefan on 2018/5/2.
  */
 
 public interface IBookChapters extends IBaseLoadView {

@@ -56,9 +56,6 @@ public class LoginActivity extends BaseActivity {
             case R.id.login:
                 userName = edit_userName.getText().toString();
                 passWord = edit_passWord.getText().toString();
-//                if(userName.equals("")||passWord.equals("")){
-//                    T.showShort("请输入账号密码！");
-//                }
                 getLogin(userName, passWord);
 
         }
@@ -69,7 +66,7 @@ public class LoginActivity extends BaseActivity {
                 .addHeaders(tokenMap())
                 .createSApi(ApiService.class)
                 .login(userName, passWord)
-                .compose(Transformer.<BaseBean<LoginBean>>switchSchedulers(loading_dialog))
+                .compose(Transformer.switchSchedulers(loading_dialog))
                 .subscribe(new CommonObserver<BaseBean<LoginBean>>(loading_dialog) {
                     @Override
                     protected void onSuccess(BaseBean<LoginBean> loginBean) {
@@ -90,43 +87,6 @@ public class LoginActivity extends BaseActivity {
                     }
                 });
     }
-
-    private static final String TAG_EXIT = "exit";
-
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        super.onNewIntent(intent);
-//        if (intent != null) {
-//            boolean isExit = intent.getBooleanExtra(TAG_EXIT, false);
-//            if (isExit) {
-//                this.finish();
-//            }
-//        }
-//    }
-
-    private long fristTime = 0;
-    private boolean mIsExit;
-
-    /**
-     * 双击返回键退出
-     */
-
-//    @Override
-//    public void onBackPressed() {
-//
-//        long secondTime = System.currentTimeMillis();
-//        if (secondTime - fristTime < 2000) {
-//            //finish();
-//            Intent intent = new Intent(this,LoginActivity.class);
-//            intent.putExtra(LoginActivity.TAG_EXIT, true);
-//            startActivity(intent);
-//        } else {
-//            SnackBarUtils.makeShort(getWindow().getDecorView(), "再点击一次退出应用").show();
-//            fristTime = System.currentTimeMillis();
-//        }
-//
-//    }
-
     /**
      * 获取token
      *

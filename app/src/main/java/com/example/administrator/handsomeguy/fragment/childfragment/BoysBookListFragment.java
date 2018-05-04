@@ -10,7 +10,6 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.handsomeguy.R;
 import com.example.administrator.handsomeguy.activity.BookListActivity;
-import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
 import com.example.administrator.handsomeguy.fragment.adapter.BoysBookListAdapter;
 import com.example.handsomelibrary.api.ApiService;
 import com.example.handsomelibrary.base.BaseFragment;
@@ -22,9 +21,7 @@ import com.example.handsomelibrary.retrofit.observer.CommonObserver;
 import com.example.handsomelibrary.utils.JumpUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 

@@ -16,7 +16,6 @@ import com.example.administrator.handsomeguy.fragment.adapter.BookListAdapter;
 import com.example.handsomelibrary.api.ApiService;
 import com.example.handsomelibrary.base.BaseFragment;
 import com.example.handsomelibrary.interceptor.Transformer;
-import com.example.handsomelibrary.model.BaseBean;
 import com.example.handsomelibrary.model.BookBean;
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import com.example.handsomelibrary.retrofit.observer.CommonObserver;

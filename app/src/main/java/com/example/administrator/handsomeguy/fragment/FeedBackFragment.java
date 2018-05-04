@@ -2,7 +2,6 @@ package com.example.administrator.handsomeguy.fragment;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.administrator.handsomeguy.R;
@@ -28,7 +27,7 @@ public class FeedBackFragment extends BaseFragment {
     @BindView(R.id.edit_content)
     EditText edit_content;
 
-    public static FeedBackFragment newInstance(){
+    public static FeedBackFragment newInstance() {
         FeedBackFragment fragment = new FeedBackFragment();
         return fragment;
     }
@@ -42,9 +41,9 @@ public class FeedBackFragment extends BaseFragment {
     protected void initData() {
     }
 
-    private void getFeedBack(String qq,String content) {
+    private void getFeedBack(String qq, String content) {
         RxHttpUtils.createApi(ApiService.class)
-                .getFeedBack(qq,content)
+                .getFeedBack(qq, content)
                 .compose(Transformer.switchSchedulers())
                 .subscribe(new CommonObserver<String>() {
                     @Override
@@ -63,20 +62,20 @@ public class FeedBackFragment extends BaseFragment {
     }
 
     @OnClick({R.id.bt_commit})
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.bt_commit:
                 String qq = edit_qq.getText().toString();
                 String content = edit_content.getText().toString();
-                if(TextUtils.isEmpty(qq)){
+                if (TextUtils.isEmpty(qq)) {
                     T.showShort("请输入QQ号");
                     return;
                 }
-                if(TextUtils.isEmpty(content)){
+                if (TextUtils.isEmpty(content)) {
                     T.showShort("请描述一下好的建议");
                     return;
                 }
-                getFeedBack(qq,content);
+                getFeedBack(qq, content);
 
                 BaseUtils.hideInput(edit_content);
                 break;

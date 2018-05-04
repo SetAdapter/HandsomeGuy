@@ -1,8 +1,6 @@
 package com.example.administrator.handsomeguy.fragment.childfragment;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,7 +8,6 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.handsomeguy.R;
 import com.example.administrator.handsomeguy.activity.BookListActivity;
-import com.example.administrator.handsomeguy.fragment.adapter.BoysBookListAdapter;
 import com.example.administrator.handsomeguy.fragment.adapter.GirlsBookListAdapter;
 import com.example.handsomelibrary.base.BaseFragment;
 import com.example.handsomelibrary.model.ClassifyBean;

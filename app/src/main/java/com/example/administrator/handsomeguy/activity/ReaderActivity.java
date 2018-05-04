@@ -32,8 +32,6 @@ import com.example.administrator.handsomeguy.R;
 import com.example.administrator.handsomeguy.activity.noveldata.IBookChapters;
 import com.example.administrator.handsomeguy.activity.noveldata.VMBookContentInfo;
 import com.example.administrator.handsomeguy.adapter.ReadCategoryAdapter;
-import com.example.administrator.handsomeguy.apputils.apputils.page.NetPageLoader;
-import com.example.administrator.handsomeguy.apputils.helper.BookChapterHelper;
 import com.example.administrator.handsomeguy.apputils.BrightnessUtils;
 import com.example.administrator.handsomeguy.apputils.ReadSettingDialog;
 import com.example.administrator.handsomeguy.apputils.ReadSettingManager;
@@ -41,16 +39,17 @@ import com.example.administrator.handsomeguy.apputils.RxUtils;
 import com.example.administrator.handsomeguy.apputils.ScreenUtils;
 import com.example.administrator.handsomeguy.apputils.StatusBarUtils;
 import com.example.administrator.handsomeguy.apputils.StringUtils;
+import com.example.administrator.handsomeguy.apputils.apputils.page.NetPageLoader;
 import com.example.administrator.handsomeguy.apputils.apputils.page.PageLoader;
 import com.example.administrator.handsomeguy.apputils.apputils.page.PageView;
 import com.example.administrator.handsomeguy.apputils.apputils.page.TxtChapter;
+import com.example.administrator.handsomeguy.apputils.helper.BookChapterHelper;
 import com.example.handsomelibrary.base.BaseActivity;
 import com.example.handsomelibrary.model.BookChapterBean;
 import com.example.handsomelibrary.model.BookChaptersBean;
 import com.example.handsomelibrary.model.gen.CollBookBean;
 import com.example.handsomelibrary.utils.JumpUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

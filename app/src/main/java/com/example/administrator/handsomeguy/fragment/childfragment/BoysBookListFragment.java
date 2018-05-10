@@ -51,6 +51,7 @@ public class BoysBookListFragment extends BaseFragment {
         adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rv_bookList.setLayoutManager(new LinearLayoutManager(mContext));
         rv_bookList.setAdapter(adapter);
+
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

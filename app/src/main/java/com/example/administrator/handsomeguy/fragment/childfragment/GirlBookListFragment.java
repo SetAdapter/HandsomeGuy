@@ -37,6 +37,12 @@ public class GirlBookListFragment extends BaseFragment{
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void lazyData() {
+        super.lazyData();
         ClassifyBean.DataBean classifyBean = (ClassifyBean.DataBean) mCache.getAsObject("classifyBean");
         if(classifyBean!=null){
             beanList=classifyBean.getFemale();
@@ -52,8 +58,6 @@ public class GirlBookListFragment extends BaseFragment{
                     JumpUtils.jump(mContext, BookListActivity.class,bundle);
                 }
             });
-
-
         }
     }
 }

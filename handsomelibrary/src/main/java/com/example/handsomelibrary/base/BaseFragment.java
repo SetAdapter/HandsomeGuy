@@ -47,6 +47,39 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         return mContentView;
     }
 
+    //Fragment的View加载完毕的标记
+    private boolean isViewCreated;
+    //Fragment对用户可见的标记
+    private boolean isUIVisible;
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        isViewCreated = true;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isUIVisible = true;
+            lazyLoad();
+        } else {
+            isUIVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        //这里进行双重标记判断,是因为setUserVisibleHint会多次回调,并且会在onCreateView执行前回调,必须确保onCreateView加载完毕且页面可见,才加载数据
+        if (isViewCreated && isUIVisible) {
+            lazyData();
+            //数据加载完毕,恢复标记,防止重复加载
+            isViewCreated = false;
+            isUIVisible = false;
+        }
+
+    }
+
     @Override//Fragment和Activity解除关联的时候调用
     public void onDetach() {
         super.onDetach();
@@ -89,5 +122,9 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      */
     protected abstract void initData();
 
+    /**
+     * 设置懒加载数据
+     */
+    protected  void lazyData(){}
 
 }

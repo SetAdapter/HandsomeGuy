@@ -36,6 +36,11 @@ public class PublishListFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+    }
+
+    @Override
+    protected void lazyData() {
+        super.lazyData();
         ClassifyBean.DataBean classifyBean = (ClassifyBean.DataBean) mCache.getAsObject("classifyBean");
         if (classifyBean != null) {
             beanList = classifyBean.getPress();

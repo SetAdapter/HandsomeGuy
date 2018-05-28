@@ -19,6 +19,11 @@ import com.example.handsomelibrary.model.ClassifyBean;
 import com.example.handsomelibrary.retrofit.RxHttpUtils;
 import com.example.handsomelibrary.retrofit.observer.CommonObserver;
 import com.example.handsomelibrary.utils.JumpUtils;
+import com.example.handsomelibrary.utils.L;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +35,11 @@ import butterknife.BindView;
  * Created by Stefan on 2018/4/26 13:47.
  */
 
-public class BoysBookListFragment extends BaseFragment {
+public class BoysBookListFragment extends BaseFragment implements OnRefreshLoadmoreListener{
     @BindView(R.id.rv_bookList)
     RecyclerView rv_bookList;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refresh;
 
     BoysBookListAdapter adapter;
     private Dialog loading_dialog;
@@ -63,6 +70,7 @@ public class BoysBookListFragment extends BaseFragment {
     }
 
     private void getClassify() {
+        L.e("time",System.currentTimeMillis()+"");
         RxHttpUtils.createApi(ApiService.class)
                 .bookClassify()
                 .compose(Transformer.<BaseBean<ClassifyBean.DataBean>>switchSchedulers(loading_dialog))
@@ -71,6 +79,7 @@ public class BoysBookListFragment extends BaseFragment {
                     protected void onSuccess(BaseBean<ClassifyBean.DataBean> classifyBean) {
                         loading_dialog.dismiss();
                         if(null!=classifyBean){
+                            L.e("time",System.currentTimeMillis()+"");
                             adapter.setNewData(classifyBean.getData().getMale());
                             mCache.put("classifyBean",classifyBean.getData());
                             beanList=classifyBean.getData().getMale();
@@ -82,6 +91,16 @@ public class BoysBookListFragment extends BaseFragment {
                         loading_dialog.dismiss();
                     }
                 });
+
+    }
+
+    @Override
+    public void onLoadmore(RefreshLayout refreshlayout) {
+
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshlayout) {
 
     }
 

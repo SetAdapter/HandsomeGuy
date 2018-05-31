@@ -1,14 +1,19 @@
 package com.example.handsomelibrary.retrofit;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.handsomelibrary.application.BaseApp;
 import com.example.handsomelibrary.interceptor.AddCookiesInterceptor;
 import com.example.handsomelibrary.interceptor.CacheInterceptor;
 import com.example.handsomelibrary.interceptor.HeaderInterceptor;
 import com.example.handsomelibrary.interceptor.ReceivedCookiesInterceptor;
+import com.example.handsomelibrary.utils.JumpUtils;
 import com.example.handsomelibrary.utils.SpfUtils;
+import com.example.handsomelibrary.utils.T;
 
 import java.io.File;
 import java.io.InputStream;
@@ -88,6 +93,20 @@ public class GlobalRxHttp {
                 @Override
                 public void log(String message) {
                     Log.e("拦截返回数据", message);
+                    if(message.contains("token无效")){
+                        T.showShort("消息失效，请重新登录");
+                        try {
+                            Class ca=Class.forName("com.example.administrator.handsomeguy.activity.LoginActivity");
+                            Context context = BaseApp.getAppContext();
+                            Intent intent = new Intent(context, ca);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                            context.startActivity(intent);
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                 }
             });
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

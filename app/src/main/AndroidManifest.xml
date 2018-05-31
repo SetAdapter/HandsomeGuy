@@ -44,7 +44,8 @@
         <activity android:name=".activity.BookListActivity" />
         <activity android:name=".activity.BookDetailActivity" />
         <activity android:name=".activity.AboutAuthorFragment" />
-        <activity android:name=".activity.ReaderActivity"></activity>
+        <activity android:name=".activity.ReaderActivity" />
+        <activity android:name=".activity.SearchBookActivity"></activity>
     </application>
 
 </manifest>

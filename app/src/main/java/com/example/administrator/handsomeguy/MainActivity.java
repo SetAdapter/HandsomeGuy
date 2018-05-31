@@ -28,6 +28,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.handsomeguy.activity.AboutAuthorFragment;
 import com.example.administrator.handsomeguy.activity.LoginActivity;
+import com.example.administrator.handsomeguy.activity.SearchBookActivity;
 import com.example.administrator.handsomeguy.adapter.MainMenuAdapter;
 import com.example.administrator.handsomeguy.apputils.BaseUtils;
 import com.example.administrator.handsomeguy.apputils.SharedPreUtils;
@@ -78,6 +79,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
     ResideLayout mResideLayout;
     @BindView(R.id.iv_toolbar_more)
     AppCompatImageView mIvToolBarMore;
+
 
     private long fristTime = 0;
     private MainMenuAdapter mainMenuAdapter;
@@ -220,7 +222,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
         }
     }
 
-    @OnClick({R.id.iv_avatar, R.id.tv_theme, R.id.tv_SignOut, R.id.tv_back})
+    @OnClick({R.id.iv_avatar, R.id.tv_theme, R.id.tv_SignOut, R.id.tv_back,R.id.iv_toolbar_more})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_avatar:
@@ -249,14 +251,15 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
                                 dialog.dismiss();
                                 mTvDesc.setText("未登录");
                                 tv_SignOut.setText("登录");
+                                JumpUtils.jump(mContext,LoginActivity.class,null);
+                                finish();
                             }).setNegativeButton("取消", (dialog, which) -> dialog.dismiss()).show();
                 }
 
-//                if (mUsername.equals("")) {
-//                    startActivity(LoginActivity.class);
-//                } else {
-//                    startActivity(SettingActivity.class);
-//                }
+                break;
+
+            case R.id.iv_toolbar_more:
+                JumpUtils.jump(mContext, SearchBookActivity.class,null);
                 break;
 
             case R.id.tv_back:

@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 
 import com.example.handsomelibrary.utils.cache.ACache;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

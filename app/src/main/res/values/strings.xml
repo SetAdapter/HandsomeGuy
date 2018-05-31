@@ -12,7 +12,7 @@
     <string name="theme">主题</string>
     <string name="commit">提交反馈</string>
     <string name="question">请描述问题出现场景或者对本项目有更好的建议欢迎提议，谢谢</string>
-    
+
 
     <string name="about"> \t\t\t在公司的正式项目空窗期，完全没事做，闲的蛋疼时候写的(老板必须不能知道（滑稽脸）) 。
                             这是一个简单的小说阅读的项目，数据是爬取追书神器的部分数据(当然不是我干的...)，

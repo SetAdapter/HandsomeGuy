@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.handsomelibrary.view.theme.ColorRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/crl"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/colorPrimary"
-    app:layout_scrollFlags="scroll|enterAlways">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SearchBookActivity">
     <com.example.handsomelibrary.view.theme.ColorView
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:background="?attr/colorPrimary" />
-
     <com.example.handsomelibrary.view.theme.ColorRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -28,9 +25,29 @@
             android:drawableLeft="@mipmap/back"
             android:drawablePadding="4dp"
             android:padding="5dp"
-            android:text=" 沐音忆羽"
+            android:text=" 返回"
             android:textSize="16dp"
             android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edit_search"
+                android:textSize="@dimen/sp_12"
+                android:padding="5dp"
+                android:drawableLeft="@drawable/ic_search_51"
+                android:hint="  书籍名 | 作者"
+                android:background="@drawable/input_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_toolbar_more"
@@ -40,10 +57,11 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:padding="5dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/vector_search"
             tools:ignore="VectorDrawableCompat"
             tools:visibility="visible" />
 
     </com.example.handsomelibrary.view.theme.ColorRelativeLayout>
 
-</com.example.handsomelibrary.view.theme.ColorRelativeLayout>
+</LinearLayout>

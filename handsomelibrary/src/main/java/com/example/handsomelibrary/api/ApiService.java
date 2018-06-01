@@ -115,5 +115,12 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<BaseBean<String>> getFeedBack(@Field("qq") String qq, @Field("feedback") String feedback);
 
-
+    /**
+     * 搜索书籍
+     *
+     * @param keyword
+     * @return
+     */
+    @GET("api/search")
+    Observable<BaseBean<List<BookBean>>> searchBooks(@Query("keyword") String keyword);
 }

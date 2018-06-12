@@ -163,7 +163,7 @@ public class MainActivity extends BaseActivity implements ColorChooserDialog.Col
         if (currentFragment != null) {
             ft.hide(currentFragment);
         }
-
+    
         Fragment foundFragment = fragmentManager.findFragmentByTag(name);
 
         if (foundFragment == null) {

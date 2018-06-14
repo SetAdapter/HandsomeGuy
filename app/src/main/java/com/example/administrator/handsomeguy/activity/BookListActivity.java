@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.administrator.handsomeguy.R;
 import com.example.administrator.handsomeguy.fragment.HotBookFragment;
@@ -80,11 +82,14 @@ public class BookListActivity extends BaseActivity {
         nts_classify.setViewPager(vp_classify);
     }
 
-    @OnClick({R.id.tv_back})
+    @OnClick({R.id.tv_back,R.id.iv_toolbar_more})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_back:
                 JumpUtils.exitActivity(this);
+                break;
+            case R.id.iv_toolbar_more:
+                JumpUtils.jump(mContext, SearchBookActivity.class,null);
                 break;
         }
     }
